@@ -17,18 +17,29 @@ type ConfigEntry struct {
 	Values []string
 }
 
+type TrelloConfig struct {
+	Url   string
+	Token string
+}
+
+type SmtpConfig struct {
+	Hostname     string
+	Port         uint16
+	Username     string
+	Password     string
+	AuthType     string
+	SecurityType string
+}
+
+type EmailConfig struct {
+	From    string
+	To      string
+	Subject string
+}
 type Config struct {
-	EmailFrom        string
-	EmailTo          string
-	EmailSubject     string
-	SmtpHostname     string
-	SmtpPort         uint16
-	SmtpUsername     string
-	SmtpPassword     string
-	SmtpAuthType     string
-	SmtpSecurityType string
-	TrelloUrl        string
-	TrelloToken      string
+	Email  EmailConfig
+	Smtp   SmtpConfig
+	Trello TrelloConfig
 }
 
 func NewConfig() *Config {
@@ -38,19 +49,19 @@ func NewConfig() *Config {
 func (config *Config) ParseEnv() (int, error) {
 	// map env variables to config pointers
 	dataMap := map[string](ConfigEntry){
-		"EMAIL_FROM":    ConfigEntry{"string", &(config.EmailFrom), nil},
-		"EMAIL_TO":      ConfigEntry{"string", &(config.EmailTo), nil},
-		"EMAIL_SUBJECT": ConfigEntry{"string", &(config.EmailSubject), nil},
-		"TRELLO_URL":    ConfigEntry{"string", &(config.TrelloUrl), nil},
-		"TRELLO_TOKEN":  ConfigEntry{"string", &(config.TrelloToken), nil},
+		"EMAIL_FROM":    ConfigEntry{"string", &(config.Email.From), nil},
+		"EMAIL_TO":      ConfigEntry{"string", &(config.Email.To), nil},
+		"EMAIL_SUBJECT": ConfigEntry{"string", &(config.Email.Subject), nil},
+		"TRELLO_URL":    ConfigEntry{"string", &(config.Trello.Url), nil},
+		"TRELLO_TOKEN":  ConfigEntry{"string", &(config.Trello.Token), nil},
 
-		"SMTP_HOSTNAME": ConfigEntry{"string", &(config.SmtpHostname), nil},
-		"SMTP_USERNAME": ConfigEntry{"string", &(config.SmtpUsername), nil},
-		"SMTP_PASSWORD": ConfigEntry{"string", &(config.SmtpPassword), nil},
-		"SMTP_PORT":     ConfigEntry{"uint16", &(config.SmtpPort), nil},
+		"SMTP_HOSTNAME": ConfigEntry{"string", &(config.Smtp.Hostname), nil},
+		"SMTP_USERNAME": ConfigEntry{"string", &(config.Smtp.Username), nil},
+		"SMTP_PASSWORD": ConfigEntry{"string", &(config.Smtp.Password), nil},
+		"SMTP_PORT":     ConfigEntry{"uint16", &(config.Smtp.Port), nil},
 
-		"SMTP_AUTH_TYPE":     ConfigEntry{"string", &(config.SmtpAuthType), []string{"none", "plain", "login"}},
-		"SMTP_SECURITY_TYPE": ConfigEntry{"string", &(config.SmtpSecurityType), []string{"none", "tls", "starttls"}},
+		"SMTP_AUTH_TYPE":     ConfigEntry{"string", &(config.Smtp.AuthType), []string{"none", "plain", "login"}},
+		"SMTP_SECURITY_TYPE": ConfigEntry{"string", &(config.Smtp.SecurityType), []string{"none", "tls", "starttls"}},
 	}
 
 	for envVar, mapEntry := range dataMap {
