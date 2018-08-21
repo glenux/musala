@@ -3,12 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	// "log"
+	// "github.com/davecgh/go-spew/spew"
+	"log"
 	"os"
 	"strconv"
-	// "net"
-	// "net/mail"
-	// "gopkg.in/russross/blackfriday.v2"
 )
 
 type ConfigEntry struct {
@@ -60,15 +58,20 @@ func (config *Config) ParseEnv() (int, error) {
 		"SMTP_PASSWORD": ConfigEntry{"string", &(config.Smtp.Password), nil},
 		"SMTP_PORT":     ConfigEntry{"uint16", &(config.Smtp.Port), nil},
 
-		"SMTP_AUTH_TYPE":     ConfigEntry{"string", &(config.Smtp.AuthType), []string{"none", "plain", "login"}},
-		"SMTP_SECURITY_TYPE": ConfigEntry{"string", &(config.Smtp.SecurityType), []string{"none", "tls", "starttls"}},
+		"SMTP_AUTH_TYPE": ConfigEntry{"string",
+			&(config.Smtp.AuthType), []string{"none", "plain", "login"}},
+		"SMTP_SECURITY_TYPE": ConfigEntry{"string",
+			&(config.Smtp.SecurityType), []string{"none", "tls", "starttls"}},
 	}
 
 	for envVar, mapEntry := range dataMap {
 		envValue := os.Getenv(envVar)
 		if len(envValue) == 0 {
-			return -1, errors.New(fmt.Sprintf(
-				"Empty environment variable. Please set %s value", envVar))
+			errmsg := fmt.Sprintf(
+				"Empty environment variable. Please set %s value",
+				envVar,
+			)
+			log.Panic(errors.New(errmsg))
 		}
 
 		if mapEntry.Values != nil {
@@ -79,8 +82,13 @@ func (config *Config) ParseEnv() (int, error) {
 				}
 			}
 			if !allowedValue {
-				return -1, errors.New(fmt.Sprintf(
-					"Wrong value for %s=%s. Value must be one of %v", envVar, envValue, mapEntry.Values))
+				errmsg := fmt.Sprintf(
+					"Wrong value for %s=%s. Value must be one of %v",
+					envVar,
+					envValue,
+					mapEntry.Values,
+				)
+				log.Panic(errors.New(errmsg))
 			}
 		}
 
@@ -91,23 +99,36 @@ func (config *Config) ParseEnv() (int, error) {
 		case "uint16":
 			u64, err := strconv.ParseUint(envValue, 10, 16)
 			if err != nil {
-				return -1, errors.New(fmt.Sprintf(
-					"Unable to convert %s=%s to unsigned int", envVar, envValue))
+				errmsg := fmt.Sprintf(
+					"Unable to convert %s=%s to unsigned int",
+					envVar,
+					envValue,
+				)
+				log.Panic(errors.New(errmsg))
 			}
 			*(mapEntry.Ptr.(*uint16)) = uint16(u64)
 
 		case "bool":
 			b, err := strconv.ParseBool(envValue)
 			if err != nil {
-				return -1, errors.New(fmt.Sprintf(
-					"Unable to convert %s=%s to boolean", envVar, envValue))
+				errmsg := fmt.Sprintf(
+					"Unable to convert %s=%s to boolean",
+					envVar,
+					envValue,
+				)
+				log.Panic(errors.New(errmsg))
 			}
 			*(mapEntry.Ptr.(*bool)) = b
 
 		default:
-			return -1, errors.New(fmt.Sprintf("Undefined parser for %s<%s>", envVar, mapEntry.Type))
+			errmsg := fmt.Sprintf(
+				"Undefined parser for %s<%s>",
+				envVar,
+				mapEntry.Type,
+			)
+			log.Panic(errors.New(errmsg))
 		}
 	}
-	fmt.Printf("%#v\n", config)
+	// spew.Dump(config)
 	return 0, nil
 }

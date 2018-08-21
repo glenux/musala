@@ -1,15 +1,14 @@
 package main
 
 import (
-	"crypto/tls"
-	// "errors"
-	"fmt"
-	"log"
-	// "os"
-	// "strconv"
-	// "net"
-	// "net/mail"
-	"net/smtp"
+// "errors"
+// "fmt"
+// "log"
+// "os"
+// "strconv"
+// "net"
+// "net/mail"
+// "net/smtp"
 )
 
 type MailHeaders map[string]string

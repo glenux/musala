@@ -1,7 +1,10 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
+	"log"
+	"net/smtp"
 )
 
 type TransportCtx struct {
@@ -18,7 +21,7 @@ func NewTransport(config SmtpConfig) *TransportCtx {
 	ctx.Address = fmt.Sprintf("%s:%d", config.Hostname, config.Port)
 	ctx.Auth = NewTransportAuth(config)
 	ctx.Tls = NewTransportTls(config)
-	return ctx
+	return &ctx
 }
 
 func NewTransportAuth(config SmtpConfig) *smtp.Auth {
@@ -49,49 +52,67 @@ func NewTransportTls(config SmtpConfig) *tls.Config {
 	}
 }
 
-func (*TransportCtx) DialInsecure() error {
+func (ctx *TransportCtx) DialInsecure() {
+	// no SSL/TLS
+	fmt.Println("Creating SMTP client...")
+	c, err := smtp.Dial(ctx.Address)
+	if err != nil {
+		log.Panic(err)
+	}
+	ctx.Client = c
 }
 
-func (*TransportCtx) DialTls() error {
+func (ctx *TransportCtx) DialTls() {
+	fmt.Printf("Creating TLS connection to %s...\n", ctx.Address)
+	conn, err := tls.Dial("tcp", ctx.Address, ctx.Tls)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	fmt.Println("Creating SMTP client...")
+	c, err := smtp.NewClient(conn, ctx.Config.Hostname)
+	if err != nil {
+		log.Panic(err)
+	}
+	ctx.Client = c
 }
 
-func (*TransportCtx) DialStartTls(address) error {
+func (ctx *TransportCtx) DialStartTls() {
+	fmt.Println("Creating SMTP client...")
+	c, err := smtp.Dial(ctx.Address)
+	if err != nil {
+		log.Panic(err)
+	}
+	fmt.Printf("Creating StartTLS connection to %s...\n", ctx.Address)
+	c.StartTLS(ctx.Tls)
+
+	ctx.Client = c
 }
 
-func (*TransportCtx) Dial() *smtp.Client {
-	switch config.SecurityType {
+func (ctx *TransportCtx) Dial() {
+	switch ctx.Config.SecurityType {
 	case "tls":
-		fmt.Printf("Creating TLS connection to %s...\n", address)
-		conn, err := tls.Dial("tcp", address, tlsConfig)
-		if err != nil {
-			log.Panic(err)
-		}
-
-		fmt.Println("Creating SMTP client...")
-		c, err := smtp.NewClient(conn, config.Hostname)
-		if err != nil {
-			log.Panic(err)
-		}
-		return c
+		ctx.DialTls()
 
 	case "starttls":
-		fmt.Println("Creating SMTP client...")
-		c, err := smtp.Dial(address)
-		if err != nil {
-			log.Panic(err)
-		}
-		fmt.Printf("Creating StartTLS connection to %s...\n", address)
-		c.StartTLS(tlsConfig)
-
-		return c
+		ctx.DialStartTls()
 
 	default:
-		// no SSL/TLS
-		fmt.Println("Creating SMTP client...")
-		c, err := smtp.Dial(address)
-		if err != nil {
-			log.Panic(err)
-		}
-		return c
+		ctx.DialInsecure()
 	}
+}
+
+func (ctx *TransportCtx) Authenticate() {
+	err := ctx.Client.Auth(*ctx.Auth)
+	if err != nil {
+		log.Panic(err)
+	}
+}
+
+func (ctx *TransportCtx) Quit() {
+	ctx.Client.Quit()
+}
+
+func (ctx *TransportCtx) Send(email *EmailCtx) {
+	return
 }
