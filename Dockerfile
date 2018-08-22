@@ -1,9 +1,18 @@
 FROM golang:1.10 AS build
-COPY . /go/src/github.com/glenux/trello2mail-go
+
+RUN go get github.com/glenux/trello2mail-go/...
 WORKDIR /go/src/github.com/glenux/trello2mail-go
-RUN CGO_ENABLED=0 go build -o trello2mail main.go
+RUN CGO_ENABLED=0 go build ./...
 
 FROM alpine:3.7
-RUN apk add --no-cache ca-certificates
-COPY --from=build /go/src/github.com/glenux/trello2mail-go/ /usr/bin/trello2mail
-CMD ["./main"]
+RUN apk update \
+    && apk add --no-cache dcron ca-certificates \
+    && rm -rf /var/cache/apk/*
+
+RUN mkdir /app
+COPY --from=build /go/src/github.com/glenux/trello2mail-go/trello2mail /app/
+COPY trello2mail.cron /app/
+RUN /usr/bin/crontab /app/trello2mail.cron
+
+CMD ["/usr/sbin/cron","-f"]
+
