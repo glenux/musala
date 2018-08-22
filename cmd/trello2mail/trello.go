@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/adlio/trello"
 	// "github.com/davecgh/go-spew/spew"
+
+	"gopkg.in/russross/blackfriday.v2"
 	"log"
 	"net/url"
 	"os/exec"
@@ -110,6 +112,12 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 		}
 	}
 	return markdown.String()
+}
+
+func (board *TrelloBoard) ExportToHtml() string {
+	markdown := board.ExportToMarkdown()
+	html := blackfriday.Run([]byte(markdown))
+	return string(html)
 }
 
 /*
