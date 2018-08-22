@@ -1,0 +1,17 @@
+version: '3'
+services:
+  trello2mail:
+    build: .
+    environment:
+      EMAIL_FROM:    no-reply@example.com
+      EMAIL_TO:      me@example.com
+      EMAIL_SUBJECT: "Daily mail for YYYYYY"
+      TRELLO_URL:    https://trello.com/b/xxxxx/yyyy
+      TRELLO_TOKEN:  xxxxxxxxxxxxxx
+      SMTP_HOSTNAME: smtp.example.com
+      SMTP_USERNAME: foobar@example.com
+      SMTP_PASSWORD: securefoobar
+      SMTP_PORT:   587
+      SMTP_AUTH_TYPE: plain
+      SMTP_SECURITY_TYPE: tls
+
