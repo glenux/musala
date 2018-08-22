@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"crypto/tls"
+	"encoding/base64"
 	"fmt"
 	"log"
 	"net/smtp"
@@ -54,7 +56,6 @@ func NewTransportTls(config SmtpConfig) *tls.Config {
 
 func (ctx *TransportCtx) DialInsecure() {
 	// no SSL/TLS
-	fmt.Println("Creating SMTP client...")
 	c, err := smtp.Dial(ctx.Address)
 	if err != nil {
 		log.Panic(err)
@@ -63,13 +64,11 @@ func (ctx *TransportCtx) DialInsecure() {
 }
 
 func (ctx *TransportCtx) DialTls() {
-	fmt.Printf("Creating TLS connection to %s...\n", ctx.Address)
 	conn, err := tls.Dial("tcp", ctx.Address, ctx.Tls)
 	if err != nil {
 		log.Panic(err)
 	}
 
-	fmt.Println("Creating SMTP client...")
 	c, err := smtp.NewClient(conn, ctx.Config.Hostname)
 	if err != nil {
 		log.Panic(err)
@@ -78,12 +77,10 @@ func (ctx *TransportCtx) DialTls() {
 }
 
 func (ctx *TransportCtx) DialStartTls() {
-	fmt.Println("Creating SMTP client...")
 	c, err := smtp.Dial(ctx.Address)
 	if err != nil {
 		log.Panic(err)
 	}
-	fmt.Printf("Creating StartTLS connection to %s...\n", ctx.Address)
 	c.StartTLS(ctx.Tls)
 
 	ctx.Client = c
@@ -114,5 +111,25 @@ func (ctx *TransportCtx) Quit() {
 }
 
 func (ctx *TransportCtx) Send(email *EmailCtx) {
+	// Set email header
+	ctx.Client.Mail(email.Headers["From"])
+	ctx.Client.Rcpt(email.Headers["To"])
+
+	// Set email body
+	wc, err := ctx.Client.Data()
+	if err != nil {
+		log.Panic(err)
+	}
+	defer wc.Close()
+
+	var buffer bytes.Buffer
+	buffer.WriteString(email.Headers.String())
+	buffer.WriteString("\r\n")
+	buffer.WriteString(base64.StdEncoding.EncodeToString([]byte(email.Body.String())))
+
+	if _, err = buffer.WriteTo(wc); err != nil {
+		log.Panic(err)
+	}
+
 	return
 }

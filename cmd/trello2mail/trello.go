@@ -2,6 +2,7 @@ package main
 
 import (
 	//	"errors"
+	"bytes"
 	"fmt"
 	"github.com/adlio/trello"
 	// "github.com/davecgh/go-spew/spew"
@@ -38,27 +39,27 @@ func runcmd(command string) string {
 	return string(out)
 }
 
+func GetTokenProcessMessage() string {
+	url := strings.Join([]string{
+		"https://trello.com/1/authorize?expiration=never",
+		"name=taskell",
+		"scope=read",
+		"response_type=token",
+		fmt.Sprintf("key=%s", APP_KEY),
+	}, "&")
+
+	text := strings.Join([]string{
+		"Wrong TRELLO_TOKEN value. Please visit:",
+		url,
+		"When you have your access token, set TRELLO_TOKEN=<your-token>",
+	}, "\n\n")
+
+	return text
+}
+
 func NewTrello(token string) *TrelloCtx {
 	client := trello.NewClient(APP_KEY, token)
-	/*
-		if client == nil {
-			url := strings.Join([]string{
-				"https://trello.com/1/authorize?expiration=never",
-				"name=taskell",
-				"scope=read",
-				"response_type=token",
-				fmt.Sprintf("key=%s", APP_KEY),
-			}, "&")
 
-			text := strings.Join([]string{
-				"Wrong TRELLO_TOKEN value. Please visit:",
-				url,
-				"When you have your access token, set TRELLO_TOKEN=<your-token>",
-			}, "\n\n")
-
-			log.Panic(errors.New(text))
-		}
-	*/
 	ctx := TrelloCtx{}
 	ctx.Token = token
 	ctx.Client = client
@@ -79,16 +80,31 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	return TrelloBoard{Ctx: ctx, Ptr: board}
 }
 
-func (board *TrelloBoard) ExportToMarkdown() []string {
-	// var s []string
+func (board *TrelloBoard) ExportToMarkdown() string {
+	var markdown bytes.Buffer
+	var text string
 
 	lists, _ := board.Ptr.GetLists(trello.Defaults())
 	// spew.Dump(lists)
-	// s = append(s, "# Trello board")
-	for _, v := range lists {
-		fmt.Println(v.Name)
+	text = fmt.Sprintf("# Board %s\n\n", board.Ptr.Name)
+	markdown.WriteString(text)
+
+	text = fmt.Sprintf("URL: %s\n", board.Ptr.ShortUrl)
+	markdown.WriteString(text)
+
+	for listIdx := len(lists) - 1; listIdx >= 0; listIdx -= 1 {
+		list := lists[listIdx]
+		text := fmt.Sprintf("\n## %s\n\n", list.Name)
+		markdown.WriteString(text)
+
+		cards, _ := list.GetCards(trello.Defaults())
+		for _, card := range cards {
+			text := fmt.Sprintf("* %s\n", card.Name)
+			markdown.WriteString(text)
+			// spew.Dump(card)
+		}
 	}
-	return []string{}
+	return markdown.String()
 }
 
 /*
