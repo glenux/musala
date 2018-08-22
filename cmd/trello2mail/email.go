@@ -1,17 +1,13 @@
 package main
 
 import (
-	"strings"
-	// "errors"
 	"bytes"
 	"fmt"
 	"github.com/davecgh/go-spew/spew"
+	"strings"
 	// "log"
-	// "os"
 	// "strconv"
-	// "net"
 	"net/mail"
-	// "net/smtp"
 )
 
 type EmailHeaders map[string]string
