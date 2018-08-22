@@ -2,12 +2,13 @@ package main
 
 import (
 	//	"errors"
-	//	"fmt"
+	"fmt"
 	"github.com/adlio/trello"
-	//	"github.com/davecgh/go-spew/spew"
+	// "github.com/davecgh/go-spew/spew"
 	//	"log"
+	"net/url"
 	"os/exec"
-	//	"strings"
+	"strings"
 )
 
 const (
@@ -20,17 +21,9 @@ type TrelloCtx struct {
 	Client *trello.Client
 }
 
-type TrelloItem struct {
-	Title string
-}
-
-type TrelloList struct {
-	Items []TrelloItem
-}
-
 type TrelloBoard struct {
-	Ctx   TrelloCtx
-	Lists []TrelloList
+	Ctx *TrelloCtx
+	Ptr *trello.Board
 }
 
 func runcmd(command string) string {
@@ -48,7 +41,6 @@ func runcmd(command string) string {
 func NewTrello(token string) *TrelloCtx {
 	client := trello.NewClient(APP_KEY, token)
 	/*
-		spew.Dump(client)
 		if client == nil {
 			url := strings.Join([]string{
 				"https://trello.com/1/authorize?expiration=never",
@@ -75,10 +67,27 @@ func NewTrello(token string) *TrelloCtx {
 }
 
 func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
-	return TrelloBoard{Ctx: *ctx}
+	parsedUrl, err := url.Parse(boardUrl)
+	if err != nil {
+		panic(err)
+	}
+	boardId := strings.Split(parsedUrl.Path, "/")[2]
+
+	// spew.Dump(boardId)
+	board, err := ctx.Client.GetBoard(boardId, trello.Defaults())
+	// spew.Dump(board)
+	return TrelloBoard{Ctx: ctx, Ptr: board}
 }
 
-func (*TrelloBoard) ExportToMarkdown() []string {
+func (board *TrelloBoard) ExportToMarkdown() []string {
+	// var s []string
+
+	lists, _ := board.Ptr.GetLists(trello.Defaults())
+	// spew.Dump(lists)
+	// s = append(s, "# Trello board")
+	for _, v := range lists {
+		fmt.Println(v.Name)
+	}
 	return []string{}
 }
 
