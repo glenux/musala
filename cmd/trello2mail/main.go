@@ -1,8 +1,9 @@
 package main
 
 import (
-// "gopkg.in/russross/blackfriday.v2"
-// "github.com/davecgh/go-spew/spew"
+	"fmt"
+	// "gopkg.in/russross/blackfriday.v2"
+	// "github.com/davecgh/go-spew/spew"
 )
 
 func main() {
@@ -14,11 +15,13 @@ func main() {
 	trelloCtx := NewTrello(config.Trello.Token)
 	trelloBoard := trelloCtx.GetBoard(config.Trello.Url)
 	trelloMarkdown := trelloBoard.ExportToMarkdown()
+	trelloHtml := trelloBoard.ExportToHtml()
+	config.Email.Subject = fmt.Sprintf("Daily mail for %s", trelloBoard.Name)
 
 	// Create email enveloppe
 	email := NewEmail()
-	email.MakeHeaders(config.Email)
-	email.MakeBody(trelloMarkdown)
+	email.SetHeaders(config.Email)
+	email.SetBody(trelloHtml, trelloMarkdown)
 
 	// Connect and send email
 	transport := NewTransport(config.Smtp)

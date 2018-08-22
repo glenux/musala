@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"crypto/tls"
-	"encoding/base64"
 	"fmt"
 	"log"
 	"net/smtp"
@@ -122,11 +121,7 @@ func (ctx *TransportCtx) Send(email *EmailCtx) {
 	}
 	defer wc.Close()
 
-	var buffer bytes.Buffer
-	buffer.WriteString(email.Headers.String())
-	buffer.WriteString("\r\n")
-	buffer.WriteString(base64.StdEncoding.EncodeToString([]byte(email.Body.String())))
-
+	buffer := bytes.NewBufferString(email.String())
 	if _, err = buffer.WriteTo(wc); err != nil {
 		log.Panic(err)
 	}

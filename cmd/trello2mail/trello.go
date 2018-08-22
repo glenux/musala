@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/adlio/trello"
-	// "github.com/davecgh/go-spew/spew"
-
 	"gopkg.in/russross/blackfriday.v2"
 	"log"
 	"net/url"
@@ -24,8 +22,9 @@ type TrelloCtx struct {
 }
 
 type TrelloBoard struct {
-	Ctx *TrelloCtx
-	Ptr *trello.Board
+	Ctx  *TrelloCtx
+	Ptr  *trello.Board
+	Name string
 }
 
 func runcmd(command string) string {
@@ -75,10 +74,8 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	}
 	boardId := strings.Split(parsedUrl.Path, "/")[2]
 
-	// spew.Dump(boardId)
 	board, err := ctx.Client.GetBoard(boardId, trello.Defaults())
-	// spew.Dump(board)
-	return TrelloBoard{Ctx: ctx, Ptr: board}
+	return TrelloBoard{Ctx: ctx, Ptr: board, Name: board.Name}
 }
 
 func (board *TrelloBoard) ExportToMarkdown() string {
@@ -108,7 +105,6 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 		for _, card := range cards {
 			text := fmt.Sprintf("* %s\n", card.Name)
 			markdown.WriteString(text)
-			// spew.Dump(card)
 		}
 	}
 	return markdown.String()

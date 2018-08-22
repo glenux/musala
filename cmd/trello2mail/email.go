@@ -1,21 +1,35 @@
 package main
 
+// TODO: use https://github.com/domodwyer/mailyak as a base lib
+
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
+	// "github.com/davecgh/go-spew/spew"
 	"strings"
 	// "log"
 	// "strconv"
+	"math/rand"
 	"net/mail"
 )
 
 type EmailHeaders map[string]string
-type EmailBody string
 
 type EmailCtx struct {
-	Headers EmailHeaders
-	Body    EmailBody
+	Headers   EmailHeaders
+	BodyPlain string
+	BodyHtml  string
+}
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+func RandStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
 }
 
 func (headers EmailHeaders) String() string {
@@ -24,14 +38,6 @@ func (headers EmailHeaders) String() string {
 		buffer.WriteString(fmt.Sprintf("%s: %s\r\n", k, v))
 	}
 	return buffer.String()
-}
-
-func (body EmailBody) String() string {
-	res := string(body)
-	if false {
-		spew.Dump(res)
-	}
-	return res
 }
 
 func NewEmail() *EmailCtx {
@@ -46,23 +52,57 @@ func encodeRFC2047(text string) string {
 	return strings.Trim(addr.String(), " \"<@>")
 }
 
-func (email *EmailCtx) MakeHeaders(config EmailConfig) {
+func (email *EmailCtx) SetHeaders(config EmailConfig) {
 	email.Headers["Return-Path"] = config.From
 	email.Headers["From"] = config.From
 	email.Headers["To"] = config.To
 	email.Headers["Subject"] = encodeRFC2047(config.Subject)
-	// email.Headers["Content-Type"] = "text/plain; charset=\"us-ascii\";"
-	email.Headers["Content-Type"] = "text/plain; charset=\"utf-8\";"
-	email.Headers["Content-Transfer-Encoding"] = "base64"
+	email.Headers["Content-Transfer-Encoding"] = "quoted-printable"
 	email.Headers["MIME-Version"] = "1.0"
 
 	return
 }
 
-func (email *EmailCtx) MakeBody(content string) {
-	email.Body = EmailBody(content)
-	if false {
-		spew.Dump(email.Body)
-	}
+func (email *EmailCtx) SetBody(html string, plain string) {
+	email.BodyPlain = plain
+	email.BodyHtml = html
 	return
+}
+
+func (email *EmailCtx) String() string {
+	var buffer bytes.Buffer
+	mixBoundary := RandStringBytes(16)
+	altBoundary := RandStringBytes(16)
+
+	buffer.WriteString(email.Headers.String())
+	buffer.WriteString(fmt.Sprintf("Content-Type: multipart/mixed;\r\n    boundary=\"%s\"\r\n", mixBoundary))
+	buffer.WriteString("\r\n")
+
+	buffer.WriteString(fmt.Sprintf("--%s\r\n", mixBoundary))
+	buffer.WriteString(fmt.Sprintf("Content-Type: multipart/alternative;\r\n    boundary=\"%s\"\r\n", altBoundary))
+	buffer.WriteString("\r\n")
+
+	buffer.WriteString(fmt.Sprintf("--%s\r\n", altBoundary))
+	buffer.WriteString(fmt.Sprintf("Content-Type: text/plain; charset=\"utf-8\"\r\n"))
+	buffer.WriteString(fmt.Sprintf("Content-Transfer-Encoding: base64\r\n"))
+	buffer.WriteString("\r\n")
+	buffer.WriteString(base64.StdEncoding.EncodeToString([]byte(email.BodyPlain)))
+	buffer.WriteString("\r\n")
+	buffer.WriteString("\r\n")
+
+	buffer.WriteString(fmt.Sprintf("--%s\r\n", altBoundary))
+	buffer.WriteString(fmt.Sprintf("Content-Type: text/html; charset=\"utf-8\"\r\n"))
+	buffer.WriteString(fmt.Sprintf("Content-Transfer-Encoding: base64\r\n"))
+	buffer.WriteString("\r\n")
+	buffer.WriteString(base64.StdEncoding.EncodeToString([]byte(email.BodyHtml)))
+	buffer.WriteString("\r\n")
+	buffer.WriteString("\r\n")
+
+	buffer.WriteString(fmt.Sprintf("--%s--\r\n", altBoundary))
+	buffer.WriteString("\r\n")
+
+	buffer.WriteString(fmt.Sprintf("--%s--\r\n", mixBoundary))
+	buffer.WriteString("\r\n")
+
+	return buffer.String()
 }
