@@ -1,12 +1,11 @@
 package main
 
 import (
-	//	"errors"
 	"bytes"
 	"fmt"
 	"github.com/adlio/trello"
 	// "github.com/davecgh/go-spew/spew"
-	//	"log"
+	"log"
 	"net/url"
 	"os/exec"
 	"strings"
@@ -84,8 +83,11 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 	var markdown bytes.Buffer
 	var text string
 
-	lists, _ := board.Ptr.GetLists(trello.Defaults())
-	// spew.Dump(lists)
+	lists, err := board.Ptr.GetLists(trello.Defaults())
+	if err != nil {
+		log.Panic(err)
+	}
+
 	text = fmt.Sprintf("# Board %s\n\n", board.Ptr.Name)
 	markdown.WriteString(text)
 
@@ -97,7 +99,10 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 		text := fmt.Sprintf("\n## %s\n\n", list.Name)
 		markdown.WriteString(text)
 
-		cards, _ := list.GetCards(trello.Defaults())
+		cards, err := list.GetCards(trello.Defaults())
+		if err != nil {
+			log.Panic(err)
+		}
 		for _, card := range cards {
 			text := fmt.Sprintf("* %s\n", card.Name)
 			markdown.WriteString(text)
