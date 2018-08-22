@@ -12,6 +12,8 @@ services:
       SMTP_USERNAME: foobar@example.com
       SMTP_PASSWORD: securefoobar
       SMTP_PORT:   587
-      SMTP_AUTH_TYPE: plain
+      # SMTP_AUTH_TYPE accepts either "none", "plain" or "login"
+      SMTP_AUTH_TYPE: plain 
+      # SMTP_SECURITY_TYPE accepts either "none", "tls" or "starttls"
       SMTP_SECURITY_TYPE: tls
 
