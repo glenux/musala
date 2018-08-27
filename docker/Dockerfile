@@ -11,7 +11,7 @@ RUN apk update \
 
 RUN mkdir /app
 COPY --from=build /go/src/github.com/glenux/trello2mail-go/trello2mail /app/
-COPY trello2mail.cron /app/
+COPY docker/trello2mail.cron /app/
 RUN /usr/bin/crontab /app/trello2mail.cron
 
 CMD ["/usr/sbin/cron","-f"]
