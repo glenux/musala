@@ -1,0 +1,35 @@
+[global]
+smtp.username="XXX"
+smtp.password="XXX"
+smtp.port="XXX"
+smtp.hostname="XXX"
+
+email.from="no-reply@example.com"
+email.to="foo.bar@example.com"
+email.subject="Daily tasks for"
+
+[[account]]
+name="private-identity"
+platform="trello"
+token="XXX"
+
+[[account]]
+name="public-identity"
+platform="trello"
+token="XXX"
+
+[[tasklist]]
+name="My Lifes Relies on Trello"
+account="private-identity"
+schedule="* */8 * * *"
+
+[[tasklist]]
+name="Company Management"
+account="public-identity"
+schedule="* */8 * * *"
+
+[[tasklist]]
+name="Company Project X"
+account="public-identity"
+schedule="* */8 * * *"
+
