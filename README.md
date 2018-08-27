@@ -6,12 +6,19 @@ Every morning, get the content of your favorite task list by email
 
 ## Installation
 
+### With go
+
 Make sure you have Go installed, then type:
 
     go install github.com/glenux/trello2mail-go/...
 
 It will install Trello2Mail binary in `$GOPATH/bin`
 
+### With docker
+
+Make sure you have Docker installed, then type:
+
+    docker build -t trello2mail -f docker/Dockerfile .
 
 ## Usage
 
