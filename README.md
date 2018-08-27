@@ -1,7 +1,7 @@
 
 # Trello-2-Mail
 
-Every morning, get the content of your favorite trello board by email
+Every morning, get the content of your favorite task list by email
 
 
 ## Installation
