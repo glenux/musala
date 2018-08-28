@@ -22,6 +22,8 @@ Make sure you have Docker installed, then type:
 
 ## Usage
 
+## Normal use
+
 Prepare your environment with the following variables
 
 ```
@@ -44,6 +46,17 @@ Then run the program:
 
     $GOPATH/bin/trello2mail
 
+### With docker
+
+    docker run  \
+        -e EMAIL_FROM=
+        -e EMAIL_TO=
+        -e EMAIL_SUBJECT=
+        -e EMAIL_FROM=
+        -e EMAIL_TO=
+        -e EMAIL_SUBJECT=
+        -v /var/lib/trello2mail/trello2mail.cron:/app/trello2mail.cron \
+        -it trello2mail:latest
 
 ## Contributing
 
