@@ -1,8 +1,8 @@
 # Private tasks
-0 10 * * * TRELLO_URL="" /app/trello2mail
+30 10 * * * TRELLO_URL="" /app/trello2mail
 
 # Project 1
-0 10 * * * TRELLO_URL="" /app/trello2mail
+30 10 * * * TRELLO_URL="" /app/trello2mail
 
 # Project 2
-0 10 * * * TRELLO_URL="" /app/trello2mail
+30 10 * * * TRELLO_URL="" /app/trello2mail
