@@ -13,5 +13,5 @@ RUN mkdir /app
 COPY --from=build /go/src/github.com/glenux/trello2mail-go/trello2mail /app/
 COPY docker/trello2mail.cron /app/
 
-CMD ["sh", "-c", "/usr/bin/crontab /app/trello2mail.cron && /usr/sbin/cron -f"]
+CMD ["/bin/sh", "-c", "/usr/bin/crontab /app/trello2mail.cron && /usr/sbin/cron -f"]
 
