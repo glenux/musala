@@ -5,10 +5,11 @@ package main
 import (
 	"bytes"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	// "github.com/davecgh/go-spew/spew"
+	"log"
 	"strings"
-	// "log"
 	// "strconv"
 	"math/rand"
 	"net/mail"
@@ -48,14 +49,23 @@ func NewEmail() *EmailCtx {
 
 func encodeRFC2047(text string) string {
 	// use mail's rfc2047 to encode any string
-	addr := mail.Address{text, ""}
+	addr := mail.Address{Name: text, Address: ""}
 	return strings.Trim(addr.String(), " \"<@>")
 }
 
 func (email *EmailCtx) SetHeaders(config EmailConfig) {
 	email.Headers["Return-Path"] = config.From
 	email.Headers["From"] = config.From
-	email.Headers["To"] = config.To
+	fmt.Printf("config.To %#v\n", config.To)
+	if len(config.To) < 1 {
+		errmsg := "EMAIL_TO must contain at least one value"
+		log.Panic(errors.New(errmsg))
+	}
+	email.Headers["To"] = config.To[0]
+
+	if len(config.To) > 1 {
+		email.Headers["Cc"] = strings.Join(config.To[1:], ",")
+	}
 	email.Headers["Subject"] = encodeRFC2047(config.Subject)
 	email.Headers["Content-Transfer-Encoding"] = "quoted-printable"
 	email.Headers["MIME-Version"] = "1.0"

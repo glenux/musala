@@ -3,9 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
 	// "github.com/davecgh/go-spew/spew"
 	"log"
 	"os"
+	// "reflect"
 	"strconv"
 )
 
@@ -31,7 +33,7 @@ type SmtpConfig struct {
 
 type EmailConfig struct {
 	From    string
-	To      string
+	To      []string
 	Subject string
 }
 type Config struct {
@@ -48,7 +50,7 @@ func (config *Config) ParseEnv() (int, error) {
 	// map env variables to config pointers
 	dataMap := map[string](ConfigEntry){
 		"EMAIL_FROM":    ConfigEntry{"string", &(config.Email.From), nil},
-		"EMAIL_TO":      ConfigEntry{"string", &(config.Email.To), nil},
+		"EMAIL_TO":      ConfigEntry{"stringlist", &(config.Email.To), nil},
 		"EMAIL_SUBJECT": ConfigEntry{"string", &(config.Email.Subject), nil},
 		"TRELLO_URL":    ConfigEntry{"string", &(config.Trello.Url), nil},
 		"TRELLO_TOKEN":  ConfigEntry{"string", &(config.Trello.Token), nil},
@@ -95,6 +97,10 @@ func (config *Config) ParseEnv() (int, error) {
 		switch mapEntry.Type {
 		case "string":
 			*(mapEntry.Ptr.(*string)) = envValue
+
+		case "stringlist":
+			ptrs := strings.Split(envValue, ",")
+			mapEntry.Ptr = ptrs
 
 		case "uint16":
 			u64, err := strconv.ParseUint(envValue, 10, 16)
