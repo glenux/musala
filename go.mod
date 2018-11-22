@@ -1,4 +1,4 @@
-module github.com/glenux/trello2mail-go
+module github.com/glenux/trello2mail
 
 require (
 	github.com/adlio/trello v0.0.0-20180621142300-8a458717123e
