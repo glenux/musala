@@ -1,3 +1,4 @@
 /trello2mail
 /vendor
 /tmp
+.env
