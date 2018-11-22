@@ -1,9 +1,9 @@
 FROM golang:1.11 AS build
 
-RUN go get -v -d github.com/glenux/trello2mail/...
+RUN git clone https://github.com/glenux/trello2mail /app
 
-WORKDIR /go/src/github.com/glenux/trello2mail
-RUN CGO_ENABLED=0 go build ./...
+WORKDIR /app
+RUN CGO_ENABLED=0 go build -v ./...
 
 FROM alpine:3.7
 RUN apk update \
@@ -11,8 +11,8 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 RUN mkdir /app
-COPY --from=build /go/src/github.com/glenux/trello2mail/trello2mail /app/
-COPY docker/trello2mail.cron /app/
+COPY --from=build /app/trello2mail /app/
+COPY --from=build /app/docker/trello2mail.cron /app/
 
 CMD ["/bin/sh", "-c", "/usr/bin/crontab /app/trello2mail.cron && /usr/sbin/crond -f"]
 
