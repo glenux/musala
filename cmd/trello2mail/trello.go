@@ -104,7 +104,7 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 			log.Panic(err)
 		}
 		for _, card := range cards {
-			text := fmt.Sprintf("* %s\n", card.Name)
+			text := fmt.Sprintf("* %s ([link](%s))\n", card.Name, card.Url)
 			markdown.WriteString(text)
 		}
 	}
