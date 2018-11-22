@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/adlio/trello"
-	"github.com/russross/blackfriday"
+	"github.com/russross/blackfriday/v2"
 	// "gopkg.in/russross/blackfriday.v2"
 	"log"
 	"net/url"

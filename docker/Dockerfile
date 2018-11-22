@@ -1,7 +1,6 @@
-FROM golang:1.10 AS build
+FROM golang:1.11 AS build
 
-RUN go mod download github.com/glenux/trello2mail \
- && go get github.com/glenux/trello2mail/...
+RUN go get -v -d github.com/glenux/trello2mail/...
 
 WORKDIR /go/src/github.com/glenux/trello2mail
 RUN CGO_ENABLED=0 go build ./...
