@@ -1,7 +1,9 @@
 version: '3'
 services:
   trello2mail:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     environment:
       EMAIL_FROM:    no-reply@example.com
       EMAIL_TO:      me@example.com
