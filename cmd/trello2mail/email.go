@@ -7,12 +7,10 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	// "github.com/davecgh/go-spew/spew"
 	"log"
-	"strings"
-	// "strconv"
 	"math/rand"
 	"net/mail"
+	"strings"
 )
 
 type EmailHeaders map[string]string

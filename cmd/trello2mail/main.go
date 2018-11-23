@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	// "gopkg.in/russross/blackfriday.v2"
-	// "github.com/davecgh/go-spew/spew"
 )
 
 func main() {
