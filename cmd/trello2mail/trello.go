@@ -15,7 +15,7 @@ import (
 
 const (
 	// FIXME: declare app to trello and get a real token for this app
-	APP_KEY string = "80dbcf6f88f62cc5639774e13342c20b"
+	APP_KEY string = "58117ebf843d49b05bca074c5fd520ee" // 80dbcf6f88f62cc5639774e13342c20b"
 )
 
 type TrelloConfig struct {
