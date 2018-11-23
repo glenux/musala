@@ -10,7 +10,6 @@ func main() {
 	// Setup config
 	config := NewConfig()
 	config.Parse()
-	fmt.Printf("%#v\n", config)
 
 	// Get task list as markdown
 	trelloCtx := NewTrello(config.TrelloToken)

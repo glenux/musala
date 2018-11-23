@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"github.com/adlio/trello"
 	"github.com/russross/blackfriday/v2"
-	// "gopkg.in/russross/blackfriday.v2"
 	"log"
 	"net/url"
 	"os/exec"
 	"strings"
+	"text/template"
 )
 
 const (
@@ -87,36 +87,76 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	return TrelloBoard{Ctx: ctx, Ptr: board, Name: board.Name}
 }
 
-func (board *TrelloBoard) ExportToMarkdown() string {
-	var markdown bytes.Buffer
-	var text string
+type CardData struct {
+	Name string
+	Url  string
+}
 
+type ListData struct {
+	Name  string
+	Cards []CardData
+}
+
+type BoardData struct {
+	Name  string
+	Url   string
+	Lists []ListData
+}
+
+func (board *TrelloBoard) ExportData() BoardData {
+	var boardData = BoardData{
+		Name:  board.Ptr.Name,
+		Url:   board.Ptr.ShortUrl,
+		Lists: make([]ListData, 0),
+	}
+
+	// get lists
 	lists, err := board.Ptr.GetLists(trello.Defaults())
 	if err != nil {
 		log.Panic(err)
 	}
 
-	text = fmt.Sprintf("# Board %s\n\n", board.Ptr.Name)
-	markdown.WriteString(text)
-
-	text = fmt.Sprintf("URL: %s\n", board.Ptr.ShortUrl)
-	markdown.WriteString(text)
-
+	// fill in reverse order
 	for listIdx := len(lists) - 1; listIdx >= 0; listIdx -= 1 {
 		list := lists[listIdx]
-		text := fmt.Sprintf("\n## %s\n\n", list.Name)
-		markdown.WriteString(text)
+		listData := ListData{
+			Name:  list.Name,
+			Cards: make([]CardData, 0),
+		}
 
 		cards, err := list.GetCards(trello.Defaults())
 		if err != nil {
 			log.Panic(err)
 		}
 		for _, card := range cards {
-			text := fmt.Sprintf("* %s ([link](%s))\n", card.Name, card.Url)
-			markdown.WriteString(text)
+			cardData := CardData{
+				Name: card.Name,
+				Url:  card.Url,
+			}
+			listData.Cards = append(listData.Cards, cardData)
 		}
+
+		boardData.Lists = append(boardData.Lists, listData)
 	}
-	return markdown.String()
+
+	return boardData
+}
+
+func (board *TrelloBoard) ExportToMarkdown() string {
+	var buf bytes.Buffer
+
+	data := board.ExportData()
+
+	t, err := template.ParseFiles("templates/markdown.tmpl")
+	if err != nil {
+		log.Panic("Unable to parse template files")
+	}
+
+	if err := t.Execute(&buf, data); err != nil {
+		log.Panicf("Template execution: %s", err)
+	}
+
+	return buf.String()
 }
 
 func (board *TrelloBoard) ExportToHtml() string {
@@ -124,9 +164,3 @@ func (board *TrelloBoard) ExportToHtml() string {
 	html := blackfriday.Run([]byte(markdown))
 	return string(html)
 }
-
-/*
-func RunTaskell(boardUrl string) {
-	cmd := fmt.Sprintf("taskell -t %s -", boardUrl)
-	markdown := strings.TrimSpace(runcmd(cmd))
-}*/

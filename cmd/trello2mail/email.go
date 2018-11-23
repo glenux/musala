@@ -62,7 +62,6 @@ func encodeRFC2047(text string) string {
 func (email *EmailCtx) SetHeaders(config EmailConfig) {
 	email.Headers["Return-Path"] = config.From
 	email.Headers["From"] = config.From
-	fmt.Printf("config.To %#v\n", config.To)
 	if len(config.To) < 1 {
 		errmsg := "EMAIL_TO must contain at least one value"
 		log.Panic(errors.New(errmsg))

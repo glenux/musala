@@ -86,9 +86,6 @@ func (self *Config) Parse() error {
 	// environment & config
 	// viper.SetEnvPrefix("")
 
-	fmt.Printf("all: %#v\n", viper.AllSettings())
-	fmt.Printf("email-from %s\n", viper.Get("email-from"))
-
 	if err := self.Parser.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)

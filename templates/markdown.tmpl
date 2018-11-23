@@ -1,0 +1,8 @@
+# Board {{ .Name }}
+
+{{ range .Lists }}{{ if .Cards }}
+## {{ .Name }}
+
+{{ range .Cards }}* {{ .Name }} ([link]({{.Url}}))
+{{ end }}
+{{ end }}{{ end }}
