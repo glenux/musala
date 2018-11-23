@@ -22,6 +22,13 @@ Make sure you have Docker installed, then type:
 
 ## Usage
 
+## Getting a Trello TOKEN
+
+Open the following URL in your web browser and authenticate yourself. That will
+give you the TRELLO_TOKEN that will be needed in the next step.
+
+<https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=58117ebf843d49b05bca074c5fd520ee>
+
 ## Normal use
 
 Prepare your environment with the following variables
