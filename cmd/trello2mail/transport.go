@@ -8,6 +8,15 @@ import (
 	"net/smtp"
 )
 
+type SmtpConfig struct {
+	Hostname     string
+	Port         uint16
+	Username     string
+	Password     string
+	AuthType     string
+	SecurityType string
+}
+
 type TransportCtx struct {
 	Config  SmtpConfig
 	Address string

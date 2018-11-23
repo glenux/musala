@@ -17,6 +17,11 @@ const (
 	APP_KEY string = "80dbcf6f88f62cc5639774e13342c20b"
 )
 
+type TrelloConfig struct {
+	Url   string
+	Token string
+}
+
 type TrelloCtx struct {
 	Token  string
 	Client *trello.Client
@@ -76,6 +81,9 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	boardId := strings.Split(parsedUrl.Path, "/")[2]
 
 	board, err := ctx.Client.GetBoard(boardId, trello.Defaults())
+	if err != nil {
+		log.Panic(err)
+	}
 	return TrelloBoard{Ctx: ctx, Ptr: board, Name: board.Name}
 }
 

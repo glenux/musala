@@ -9,22 +9,35 @@ import (
 func main() {
 	// Setup config
 	config := NewConfig()
-	config.ParseEnv()
+	config.Parse()
+	fmt.Printf("%#v\n", config)
 
 	// Get task list as markdown
-	trelloCtx := NewTrello(config.Trello.Token)
-	trelloBoard := trelloCtx.GetBoard(config.Trello.Url)
+	trelloCtx := NewTrello(config.TrelloToken)
+	trelloBoard := trelloCtx.GetBoard(config.TrelloUrl)
 	trelloMarkdown := trelloBoard.ExportToMarkdown()
 	trelloHtml := trelloBoard.ExportToHtml()
-	config.Email.Subject = fmt.Sprintf("Daily mail for %s", trelloBoard.Name)
+	config.EmailSubject = fmt.Sprintf("Daily mail for %s", trelloBoard.Name)
 
 	// Create email enveloppe
 	email := NewEmail()
-	email.SetHeaders(config.Email)
+	email.SetHeaders(EmailConfig{
+		From:    config.EmailFrom,
+		To:      config.EmailTo,
+		Subject: config.EmailSubject,
+	})
 	email.SetBody(trelloHtml, trelloMarkdown)
 
 	// Connect and send email
-	transport := NewTransport(config.Smtp)
+	transport := NewTransport(SmtpConfig{
+		Hostname:     config.SmtpHostname,
+		Port:         config.SmtpPort,
+		Username:     config.SmtpUsername,
+		Password:     config.SmtpPassword,
+		AuthType:     config.SmtpAuthType,
+		SecurityType: config.SmtpSecurityType,
+	})
+
 	transport.Dial()
 	transport.Authenticate()
 	transport.Send(email)

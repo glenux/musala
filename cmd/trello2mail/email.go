@@ -17,6 +17,12 @@ import (
 
 type EmailHeaders map[string]string
 
+type EmailConfig struct {
+	From    string
+	To      []string
+	Subject string
+}
+
 type EmailCtx struct {
 	Headers   EmailHeaders
 	BodyPlain string
