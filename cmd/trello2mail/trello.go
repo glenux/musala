@@ -3,7 +3,8 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/adlio/trello"
+	// "github.com/adlio/trello"
+	trello "github.com/glenux/contrib-trello"
 	"github.com/russross/blackfriday/v2"
 	"log"
 	"net/url"
@@ -28,9 +29,11 @@ type TrelloCtx struct {
 }
 
 type TrelloBoard struct {
-	Ctx  *TrelloCtx
-	Ptr  *trello.Board
-	Name string
+	Ctx     *TrelloCtx
+	Ptr     *trello.Board
+	Starred bool
+	Closed  bool
+	Name    string
 }
 
 func runcmd(command string) string {
@@ -73,6 +76,35 @@ func NewTrello(token string) *TrelloCtx {
 	return &ctx
 }
 
+func (ctx *TrelloCtx) GetBoards() []TrelloBoard {
+	var result []TrelloBoard
+
+	token, err := ctx.Client.GetToken(ctx.Token, trello.Defaults())
+	if err != nil {
+		log.Panic(err)
+	}
+
+	member, err := ctx.Client.GetMember(token.IDMember, trello.Defaults())
+	if err != nil {
+		log.Panic(err)
+	}
+
+	boards, err := member.GetBoards(trello.Defaults())
+	if err != nil {
+		log.Panic(err)
+	}
+	for _, board := range boards {
+		result = append(result, TrelloBoard{
+			Ctx:     ctx,
+			Starred: board.Starred,
+			Closed:  board.Closed,
+			Ptr:     board,
+			Name:    board.Name,
+		})
+	}
+	return result
+}
+
 func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	parsedUrl, err := url.Parse(boardUrl)
 	if err != nil {
@@ -84,7 +116,13 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	if err != nil {
 		log.Panic(err)
 	}
-	return TrelloBoard{Ctx: ctx, Ptr: board, Name: board.Name}
+	return TrelloBoard{
+		Ctx:     ctx,
+		Starred: board.Starred,
+		Closed:  board.Closed,
+		Ptr:     board,
+		Name:    board.Name,
+	}
 }
 
 type CardData struct {
