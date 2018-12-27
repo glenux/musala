@@ -21,7 +21,7 @@ RUN apk update \
 RUN mkdir /app
 COPY --from=build /app/trello2mail /app/
 COPY docker/trello2mail.cron /app/
-COPY templates/ /app/
+COPY templates/ /app/templates
 
 CMD ["/bin/sh", "-c", "/usr/bin/crontab /app/trello2mail.cron && /usr/sbin/crond -f"]
 
