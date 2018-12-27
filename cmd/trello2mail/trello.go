@@ -8,7 +8,9 @@ import (
 	"github.com/russross/blackfriday/v2"
 	"log"
 	"net/url"
+	"os"
 	"os/exec"
+	"path"
 	"strings"
 	"text/template"
 )
@@ -185,7 +187,8 @@ func (board *TrelloBoard) ExportToMarkdown() string {
 
 	data := board.ExportData()
 
-	t, err := template.ParseFiles("templates/markdown.tmpl")
+	wd, err := os.Getwd()
+	t, err := template.ParseFiles(path.Join(wd, "templates/markdown.tmpl"))
 	if err != nil {
 		log.Panic("Unable to parse template files")
 	}
