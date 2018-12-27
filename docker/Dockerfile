@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 go build -v ./...
 
 FROM alpine:3.7
 RUN apk update \
-    && apk add --no-cache dcron tzdata ca-certificates \
+    && apk add --no-cache dcron tzdata ca-certificates bash \
     && rm -rf /var/cache/apk/*
 
 RUN mkdir /app
