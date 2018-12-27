@@ -50,8 +50,8 @@ func NewTransportAuth(config SmtpConfig) *smtp.Auth {
 		return &auth
 
 	default:
+		return nil
 	}
-	return nil
 }
 
 func NewTransportTls(config SmtpConfig) *tls.Config {
@@ -108,6 +108,12 @@ func (ctx *TransportCtx) Dial() {
 }
 
 func (ctx *TransportCtx) Authenticate() {
+	// guard
+	if ctx.Auth == nil {
+		return
+	}
+
+	// ok, we have to
 	err := ctx.Client.Auth(*ctx.Auth)
 	if err != nil {
 		log.Panic(err)

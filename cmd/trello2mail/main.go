@@ -11,13 +11,21 @@ func main() {
 
 	// Get task list as markdown
 	trelloCtx := NewTrello(config.TrelloToken)
-	for _, trelloBoard := range trelloCtx.GetBoards() {
+
+	var trelloBoardsList []TrelloBoard
+	if len(config.TrelloUrl) > 0 {
+		trelloBoard := trelloCtx.GetBoard(config.TrelloUrl)
+		trelloBoardsList = append(trelloBoardsList, trelloBoard)
+	} else {
+		trelloBoardsList = trelloCtx.GetBoards()
+	}
+
+	for _, trelloBoard := range trelloBoardsList {
 		if !trelloBoard.Starred || trelloBoard.Closed {
 			continue
 		}
 		fmt.Printf("Loading board %s\n", trelloBoard.Name)
 
-		// trelloBoard := trelloCtx.GetBoard(config.TrelloUrl)
 		trelloMarkdown := trelloBoard.ExportToMarkdown()
 		trelloHtml := trelloBoard.ExportToHtml()
 		config.EmailSubject = fmt.Sprintf("Daily mail for %s", trelloBoard.Name)
