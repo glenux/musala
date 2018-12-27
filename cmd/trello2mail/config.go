@@ -87,6 +87,11 @@ func (self *Config) Parse() error {
 		os.Exit(1)
 	}
 
+	showHelp, _ := self.Parser.Flags().GetBool("help")
+	if showHelp {
+		os.Exit(0)
+	}
+
 	if err := viper.Unmarshal(&self); err != nil {
 		panic("Unable to unmarshal config")
 	}
