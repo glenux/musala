@@ -1,4 +1,3 @@
-
 # Trello-2-Mail
 
 Every morning, get the content of your favorite task list by email
