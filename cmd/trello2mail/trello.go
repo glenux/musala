@@ -1,9 +1,12 @@
 package main
 
+import "github.com/davecgh/go-spew/spew"
+
 import (
 	"bytes"
 	"fmt"
 	// "github.com/adlio/trello"
+
 	trello "github.com/glenux/contrib-trello"
 	"github.com/russross/blackfriday/v2"
 	"log"
@@ -118,6 +121,9 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 	if err != nil {
 		log.Panic(err)
 	}
+
+	// fmt.Printf("%#v\n", board)
+	spew.Dump(board)
 	return TrelloBoard{
 		Ctx:     ctx,
 		Starred: board.Starred,

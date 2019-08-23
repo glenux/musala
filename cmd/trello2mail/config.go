@@ -3,6 +3,7 @@ package main
 import (
 	// "errors"
 	"fmt"
+	// "github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
@@ -50,14 +51,9 @@ func NewConfig() *Config {
 	cmd.PersistentFlags().StringVarP(&self.EmailFrom, "email-from", "", "", "address of sender")
 	cmd.PersistentFlags().StringArrayVarP(&self.EmailTo, "email-to", "", []string{}, "address(es) of recipient(s)")
 	cmd.PersistentFlags().StringVarP(&self.EmailSubject, "email-subject", "", "", "email subject")
-	viper.BindPFlag("email-from", cmd.PersistentFlags().Lookup("email-from"))
-	viper.BindPFlag("email-to", cmd.PersistentFlags().Lookup("email-to"))
-	viper.BindPFlag("email-subject", cmd.PersistentFlags().Lookup("email-subject"))
 
 	cmd.PersistentFlags().StringVarP(&self.TrelloUrl, "trello-url", "", "", "url of trello board")
 	cmd.PersistentFlags().StringVarP(&self.TrelloToken, "trello-token", "", "", "url of trello token")
-	viper.BindPFlag("trello-url", cmd.PersistentFlags().Lookup("trello-url"))
-	viper.BindPFlag("trello-token", cmd.PersistentFlags().Lookup("trello-token"))
 
 	cmd.PersistentFlags().StringVarP(&self.SmtpHostname, "smtp-hostname", "", "", "address of smtp server")
 	cmd.PersistentFlags().StringVarP(&self.SmtpUsername, "smtp-username", "", "", "username for smtp server")
@@ -65,6 +61,12 @@ func NewConfig() *Config {
 	cmd.PersistentFlags().Uint16VarP(&self.SmtpPort, "smtp-port", "", 25, "port for smtp server")
 	cmd.PersistentFlags().StringVarP(&self.SmtpAuthType, "smtp-auth-type", "", "", "authentication type for smtp server")
 	cmd.PersistentFlags().StringVarP(&self.SmtpSecurityType, "smtp-security-type", "", "", "security type for smtp server")
+
+	viper.BindPFlag("email-from", cmd.PersistentFlags().Lookup("email-from"))
+	viper.BindPFlag("email-to", cmd.PersistentFlags().Lookup("email-to"))
+	viper.BindPFlag("email-subject", cmd.PersistentFlags().Lookup("email-subject"))
+	viper.BindPFlag("trello-url", cmd.PersistentFlags().Lookup("trello-url"))
+	viper.BindPFlag("trello-token", cmd.PersistentFlags().Lookup("trello-token"))
 	viper.BindPFlag("smtp-hostname", cmd.PersistentFlags().Lookup("smtp-hostname"))
 	viper.BindPFlag("smtp-username", cmd.PersistentFlags().Lookup("smtp-username"))
 	viper.BindPFlag("smtp-password", cmd.PersistentFlags().Lookup("smtp-password"))
@@ -96,6 +98,6 @@ func (self *Config) Parse() error {
 		panic("Unable to unmarshal config")
 	}
 
-	// spew.Dump(config)
+	// spew.Dump(self)
 	return nil
 }

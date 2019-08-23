@@ -8,6 +8,8 @@ github.com/glenux/contrib-trello v0.0.0-20181009211147-e4cc07c871d0 h1:u6tAr2/SS
 github.com/glenux/contrib-trello v0.0.0-20181009211147-e4cc07c871d0/go.mod h1:A69TOILEJYbyfZyLw5gfn5E8hQPzXuBG2Oh36nutIFA=
 github.com/glenux/contrib-trello v0.0.0-20181123120736-c8291e6a707a h1:Oie4PAFrDkFI+B19wC7jzI87QiFrX/O6EBNiIsp4n0E=
 github.com/glenux/contrib-trello v0.0.0-20181123120736-c8291e6a707a/go.mod h1:A69TOILEJYbyfZyLw5gfn5E8hQPzXuBG2Oh36nutIFA=
+github.com/go-mail/mail v2.3.1+incompatible h1:UzNOn0k5lpfVtO31cK3hn6I4VEVGhe3lX8AJBAxXExM=
+github.com/go-mail/mail v2.3.1+incompatible/go.mod h1:VPWjmmNyRsWXQZHVHT3g0YbIINUkSmuKOiLIDkWbL6M=
 github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
