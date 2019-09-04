@@ -36,10 +36,10 @@ func main() {
 	for _, trelloBoard := range trelloBoardsList {
 		fmt.Printf("d: loading board %s\n", trelloBoard.Name)
 		if !trelloBoard.Starred || trelloBoard.Closed {
-			fmt.Println("d: skipping")
+			fmt.Printf("d: skipping %s\n", trelloBoard.Name)
 			continue
 		}
-		fmt.Println("d: exporting content")
+		fmt.Printf("d: exporting content of %s\n", trelloBoard.Name)
 
 		trelloMarkdown := trelloBoard.ExportToMarkdown()
 		trelloHtml := trelloBoard.ExportToHtml()
@@ -53,12 +53,13 @@ func main() {
 		}
 		email.SetHeader("From", config.EmailFrom)
 		email.SetHeader("Subject", config.EmailSubject)
-		email.SetBody(trelloHtml, trelloMarkdown)
+		email.SetBody("text/plain", trelloMarkdown)
+		email.AddAlternative("text/html", trelloHtml)
 
 		// Connect and send email
 		var transport *mail.Dialer
 		if len(config.SmtpUsername) > 0 {
-			fmt.Println("transport w/ username")
+			fmt.Println("d: transport w/ username")
 			transport = mail.NewDialer(
 				config.SmtpHostname,
 				int(config.SmtpPort),
@@ -68,7 +69,7 @@ func main() {
 			// disable cert verification
 			transport.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 		} else {
-			fmt.Println("transport w/ no username")
+			fmt.Println("d: transport w/out username")
 			transport = &mail.Dialer{
 				Host: config.SmtpHostname,
 				Port: int(config.SmtpPort),

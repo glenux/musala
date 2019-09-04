@@ -1,10 +1,10 @@
 # Board {{ .Name }}
 
-URL: {{ .Url }}
+URL: {{ .URL }}
 
 {{ range .Lists }}{{ if .Cards }}
 ## {{ .Name }}
 
-{{ range .Cards }}* {{ .Name }} ([link]({{.Url}}))
+{{ range .Cards }}* {{ .Name }} ([link]({{.URL}}))
 {{ end }}
 {{ end }}{{ end }}

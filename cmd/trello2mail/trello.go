@@ -134,12 +134,12 @@ func (ctx *TrelloCtx) GetBoards() []TrelloBoard {
 	return result
 }
 
-func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
-	parsedUrl, err := url.Parse(boardUrl)
+func (ctx *TrelloCtx) GetBoard(boardURL string) TrelloBoard {
+	parsedURL, err := url.Parse(boardURL)
 	if err != nil {
 		panic(err)
 	}
-	boardId := strings.Split(parsedUrl.Path, "/")[2]
+	boardId := strings.Split(parsedURL.Path, "/")[2]
 
 	board, err := ctx.Client.GetBoard(boardId, trello.Defaults())
 	if err != nil {
@@ -159,7 +159,7 @@ func (ctx *TrelloCtx) GetBoard(boardUrl string) TrelloBoard {
 
 type CardData struct {
 	Name string
-	Url  string
+	URL  string
 }
 
 type ListData struct {
@@ -169,14 +169,14 @@ type ListData struct {
 
 type BoardData struct {
 	Name  string
-	Url   string
+	URL   string
 	Lists []ListData
 }
 
 func (board *TrelloBoard) ExportData() BoardData {
 	var boardData = BoardData{
 		Name:  board.Ptr.Name,
-		Url:   board.Ptr.ShortUrl,
+		URL:   board.Ptr.ShortURL,
 		Lists: make([]ListData, 0),
 	}
 
@@ -201,7 +201,7 @@ func (board *TrelloBoard) ExportData() BoardData {
 		for _, card := range cards {
 			cardData := CardData{
 				Name: card.Name,
-				Url:  card.Url,
+				URL:  card.URL,
 			}
 			listData.Cards = append(listData.Cards, cardData)
 		}
