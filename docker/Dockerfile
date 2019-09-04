@@ -1,7 +1,7 @@
 ##
 ## stage 1 : Build
 ##
-FROM golang:1.11 AS build
+FROM golang:1.12 AS build
 
 RUN git clone                                    \
         --single-branch                          \
