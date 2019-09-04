@@ -1,8 +1,8 @@
-# Private tasks
-30 10 * * * TRELLO_URL="" /app/trello2mail
+# ALL boards for given user
+30 10 * * * cd /app && TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO="" /app/trello2mail
 
-# Project 1
-30 10 * * * TRELLO_URL="" /app/trello2mail
+# Send this board to other user
+30 10 * * * cd /app TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO=""  /app/trello2mail
 
-# Project 2
-30 10 * * * TRELLO_URL="" /app/trello2mail
+# Send this board to mailing list
+30 10 * * * cd /app TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO="" /app/trello2mail
