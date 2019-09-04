@@ -7,7 +7,7 @@ require (
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd v0.0.0-20190719114852-fd7a80b32e1f // indirect
 	github.com/davecgh/go-spew v1.1.1
-	github.com/glenux/contrib-trello v0.0.0-20190903124023-c1ad8abe5b00
+	github.com/glenux/contrib-trello v0.0.0-20190903132314-c2f0b248e3f5
 	github.com/go-kit/kit v0.9.0 // indirect
 	github.com/go-mail/mail v2.3.1+incompatible
 	github.com/gogo/protobuf v1.3.0 // indirect
@@ -46,8 +46,8 @@ require (
 	golang.org/x/image v0.0.0-20190902063713-cb417be4ba39 // indirect
 	golang.org/x/mobile v0.0.0-20190830201351-c6da95954960 // indirect
 	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
-	golang.org/x/sys v0.0.0-20190902133755-9109b7679e13 // indirect
-	golang.org/x/tools v0.0.0-20190903025054-afe7f8212f0d // indirect
+	golang.org/x/sys v0.0.0-20190904005037-43c01164e931 // indirect
+	golang.org/x/tools v0.0.0-20190903163617-be0da057c5e3 // indirect
 	google.golang.org/api v0.9.0 // indirect
 	google.golang.org/appengine v1.6.2 // indirect
 	google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55 // indirect
@@ -58,4 +58,4 @@ require (
 	honnef.co/go/tools v0.0.1-2019.2.2 // indirect
 )
 
-replace github.com/glenux/contrib-trello => /app/contrib-trello
+replace github.com/glenux/contrib-trello => ./contrib-trello
