@@ -3,8 +3,16 @@
 ##
 FROM golang:1.11 AS build
 
-# git clone https://github.com/glenux/trello2mail /app
-COPY . /app
+RUN git clone                                    \
+        --single-branch                          \
+        --branch develop                         \
+        https://github.com/glenux/trello2mail    \
+        /app                                     \
+    && git clone                                 \
+        https://github.com/glenux/contrib-trello \
+        /app/contrib-trello
+
+# COPY . /app
 
 WORKDIR /app
 RUN CGO_ENABLED=0 go build -v ./...
