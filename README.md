@@ -1,7 +1,11 @@
-# Trello-2-Mail
+# Musala Mail
 
-Every morning, get the content of your favorite task list by email
+Every morning, get the content of your favorite kanban board by email
 
+Compatibility:
+
+* :heavy_check_mark: __Trello__
+* :white_check_mark: Libreboard :x: (work in progress)
 
 ## Installation
 
@@ -9,22 +13,22 @@ Every morning, get the content of your favorite task list by email
 
 Make sure you have Go installed, then type:
 
-    go install github.com/glenux/trello2mail-go/...
+    go install github.com/glenux/musala-mail/...
 
-It will install Trello2Mail binary in `$GOPATH/bin`
+It will install Musala Mail binary in `$GOPATH/bin`
 
 ### With docker
 
 Make sure you have Docker installed, then type:
 
-    docker build -t trello2mail -f docker/Dockerfile .
+    docker build -t musala-mail -f docker/Dockerfile .
 
 ## Usage
 
 ## Creating a developper account
 
-1. Create a trello account
-2. Confirm your email
+1. Create a Trello account on <https://trello.com>
+2. Check your mailbox and confirm your email
 3. Enable developper account on <https://trello.com/app-key>
 4. Get an developer API KEY
 
@@ -33,7 +37,7 @@ Make sure you have Docker installed, then type:
 Open the following URL in your web browser and authenticate yourself. That will
 give you the TRELLO_TOKEN that will be needed in the next step.
 
-<https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Trello2Mail&key=YOUR-API-KEY>
+<https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Musala%20Mail&key=YOUR-API-KEY>
 
 ## Normal use
 
@@ -57,7 +61,7 @@ SMTP_SECURITY_TYPE: tls
 
 Then run the program:
 
-    $GOPATH/bin/trello2mail
+    $GOPATH/bin/musala-mail
 
 ### With docker
 
@@ -68,12 +72,12 @@ Then run the program:
         -e EMAIL_FROM=
         -e EMAIL_TO=
         -e EMAIL_SUBJECT=
-        -v /var/lib/trello2mail/trello2mail.cron:/app/trello2mail.cron \
-        -it trello2mail:latest
+        -v /var/lib/musala-mail/musala-mail.cron:/app/musala-mail.cron \
+        -it musala-mail:latest
 
 ## Contributing
 
-1. Fork it ( http://github.com/glenux/trello2mail-go/fork )
+1. Fork it ( http://github.com/glenux/musala-mail/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -82,13 +86,14 @@ Then run the program:
 
 ## Credits
 
-Author & Maintainer: Glenn Y. ROLLAND
+Author & Maintainer: [Glenn Y. ROLLAND](https://github.com/glenux)
 
 Contributors: none yet ;)
 
-Got questions? Need help? Tweet at @glenux
+Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 
 ## License
 
-Trello2Mail is Copyright © 2018 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+Musala Mail is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+
