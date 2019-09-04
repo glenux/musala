@@ -18,18 +18,9 @@ import (
 	"text/template"
 )
 
-const (
-	// See https://trello.com/app-key
-	APP_KEY string = "58117ebf843d49b05bca074c5fd520ee"
-)
-
-type TrelloConfig struct {
-	Url   string
-	Token string
-}
-
 type TrelloCtx struct {
 	Token  string
+	ApiKey string
 	Client *trello.Client
 }
 
@@ -53,13 +44,36 @@ func runcmd(command string) string {
 	return string(out)
 }
 
-func GetTokenProcessMessage() string {
+func MessageForApiKey() string {
+	/*
+		url := strings.Join([]string{
+			"https://trello.com/1/authorize?expiration=never",
+			"name=Trello-To-Mail",
+			"scope=read",
+			"response_type=token",
+			fmt.Sprintf("key=%s", apiKey),
+		}, "&")
+	*/
+
+	url := "https://trello.com/app-key/"
+
+	text := strings.Join([]string{
+		"Wrong or empty TRELLO_API_KEY value. Please visit:",
+		url,
+		"Then enable developper account.",
+		"When you have your user api key, set TRELLO_API_KEY=<your-api-key>",
+	}, "\n\n")
+
+	return text
+}
+
+func MessageForToken(apiKey string) string {
 	url := strings.Join([]string{
 		"https://trello.com/1/authorize?expiration=never",
-		"name=taskell",
+		"name=Trello-To-Mail",
 		"scope=read",
 		"response_type=token",
-		fmt.Sprintf("key=%s", APP_KEY),
+		fmt.Sprintf("key=%s", apiKey),
 	}, "&")
 
 	text := strings.Join([]string{
@@ -71,11 +85,21 @@ func GetTokenProcessMessage() string {
 	return text
 }
 
-func NewTrello(token string) *TrelloCtx {
-	client := trello.NewClient(APP_KEY, token)
+func NewTrello(apiKey string, token string) *TrelloCtx {
+	if len(apiKey) == 0 {
+		fmt.Println(MessageForApiKey())
+		return nil
+	}
+	if len(token) == 0 {
+		fmt.Println(MessageForToken(apiKey))
+		return nil
+	}
 
 	ctx := TrelloCtx{}
+	ctx.ApiKey = apiKey
 	ctx.Token = token
+
+	client := trello.NewClient(apiKey, token)
 	ctx.Client = client
 
 	return &ctx

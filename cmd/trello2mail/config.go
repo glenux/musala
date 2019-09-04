@@ -31,8 +31,9 @@ type Config struct {
 	SmtpAuthType     string `mapstructure:"smtp-auth-type"`
 	SmtpSecurityType string `mapstructure:"smtp-security-type"`
 
-	TrelloUrl   string `mapstructure:"trello-url"`
-	TrelloToken string `mapstructure:"trello-token"`
+	TrelloUrl    string `mapstructure:"trello-url"`
+	TrelloApiKey string `mapstructure:"trello-api-key"`
+	TrelloToken  string `mapstructure:"trello-token"`
 
 	Parser *cobra.Command `mapstructure:"-"`
 }
@@ -53,7 +54,8 @@ func NewConfig() *Config {
 	cmd.PersistentFlags().StringVarP(&self.EmailSubject, "email-subject", "", "", "email subject")
 
 	cmd.PersistentFlags().StringVarP(&self.TrelloUrl, "trello-url", "", "", "url of trello board")
-	cmd.PersistentFlags().StringVarP(&self.TrelloToken, "trello-token", "", "", "url of trello token")
+	cmd.PersistentFlags().StringVarP(&self.TrelloUrl, "trello-api-key", "", "", "API KEY for trello access")
+	cmd.PersistentFlags().StringVarP(&self.TrelloToken, "trello-token", "", "", "TOKEN for trello access")
 
 	cmd.PersistentFlags().StringVarP(&self.SmtpHostname, "smtp-hostname", "", "", "address of smtp server")
 	cmd.PersistentFlags().StringVarP(&self.SmtpUsername, "smtp-username", "", "", "username for smtp server")
@@ -67,6 +69,7 @@ func NewConfig() *Config {
 	viper.BindPFlag("email-subject", cmd.PersistentFlags().Lookup("email-subject"))
 	viper.BindPFlag("trello-url", cmd.PersistentFlags().Lookup("trello-url"))
 	viper.BindPFlag("trello-token", cmd.PersistentFlags().Lookup("trello-token"))
+	viper.BindPFlag("trello-api-key", cmd.PersistentFlags().Lookup("trello-api-key"))
 	viper.BindPFlag("smtp-hostname", cmd.PersistentFlags().Lookup("smtp-hostname"))
 	viper.BindPFlag("smtp-username", cmd.PersistentFlags().Lookup("smtp-username"))
 	viper.BindPFlag("smtp-password", cmd.PersistentFlags().Lookup("smtp-password"))

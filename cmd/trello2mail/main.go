@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"github.com/go-mail/mail"
+	"os"
 )
 
 func main() {
@@ -11,10 +12,15 @@ func main() {
 	fmt.Println("d: parsing config")
 	config := NewConfig()
 	config.Parse()
+	fmt.Printf("%+v\n", config)
 
 	// Get task list as markdown
 	fmt.Println("d: configuring trello")
-	trelloCtx := NewTrello(config.TrelloToken)
+	trelloCtx := NewTrello(config.TrelloApiKey, config.TrelloToken)
+	if trelloCtx == nil {
+		fmt.Println("ERROR: Unable to initialize trello context")
+		os.Exit(1)
+	}
 
 	fmt.Println("d: getting trello boards")
 	var trelloBoardsList []TrelloBoard
