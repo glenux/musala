@@ -1,5 +1,5 @@
 
-# Projet Trello2Mail
+# Projet Musala Mail
 
 ### Rappel par email des taches à faire
 
@@ -81,7 +81,7 @@ Le projet s'est déroulé selon les étapes suivantes, afin de minimiser le risq
 
 ### Langage de programmation
 
-Trello2mail est développé en Go ( https://golang.org ) 
+Musala Mail est développé en Go ( https://golang.org ) 
 
 Ce langage permet :
 
@@ -94,13 +94,13 @@ Ce langage permet :
 
 ### Framework
 
-Trello2mail utilise le framework blablablala
+Musala Mail utilise le framework blablablala
 
 -----
 
 ### API Trello
 
-Trello2mail utilise la bibliotheque blabla pour se connecter à l'api trello.
+Musala Mail utilise la bibliotheque blabla pour se connecter à l'api trello.
 
 L'autre bibliotheque était trop pourrie (apres avoir fait des essais pendant 2 jours).
 

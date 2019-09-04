@@ -1,6 +1,6 @@
 version: '3'
 services:
-  trello2mail:
+  app:
     build:
       context: .
       dockerfile: docker/Dockerfile

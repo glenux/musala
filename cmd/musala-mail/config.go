@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	programBinary string = "trello2mail"
+	programBinary string = "musala-mail"
 )
 
 var (

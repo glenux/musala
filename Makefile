@@ -1,6 +1,6 @@
 
 GOFILES=$(wildcard *.go)
-NAME=trello2mail
+NAME=musala-mail
 
 all: build
 

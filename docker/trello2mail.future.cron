@@ -1,9 +1,0 @@
-# Private tasks
-0 8 * * * /app/trello2main --trello-board xxxxxxxx
-
-# Project 1
-1 8 * * * /app/trello2main --trello-board yyyyyyyy
-
-# Project 2
-2 8 * * * /app/trello2main --trello-board zzzzzzzz
-

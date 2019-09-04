@@ -1,4 +1,4 @@
-module github.com/glenux/trello2mail
+module github.com/glenux/musala-mail
 
 require (
 	cloud.google.com/go v0.44.3 // indirect
