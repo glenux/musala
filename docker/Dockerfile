@@ -15,7 +15,9 @@ RUN git clone                                    \
 # COPY . /app
 
 WORKDIR /app
-RUN CGO_ENABLED=0 go build -v ./...
+
+RUN go get -u                                    \
+	&& CGO_ENABLED=0 make build
 
 
 ##
