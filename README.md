@@ -13,7 +13,7 @@ Compatibility:
 
 Make sure you have Go installed, then type:
 
-    go install github.com/glenux/musala-mail/...
+    $ go install github.com/glenux/musala-mail/...
 
 It will install Musala Mail binary in `$GOPATH/bin`
 
@@ -21,25 +21,25 @@ It will install Musala Mail binary in `$GOPATH/bin`
 
 Make sure you have Docker installed, then type:
 
-    docker build -t musala-mail -f docker/Dockerfile .
+    $ docker build -t musala-mail -f docker/Dockerfile .
 
 ## Usage
 
-## Creating a developper account
+### Creating a developper account
 
 1. Create a Trello account on <https://trello.com>
 2. Check your mailbox and confirm your email
 3. Enable developper account on <https://trello.com/app-key>
 4. Get an developer API KEY
 
-## Getting a Trello TOKEN
+### Getting a Trello TOKEN
 
 Open the following URL in your web browser and authenticate yourself. That will
 give you the TRELLO_TOKEN that will be needed in the next step.
 
 <https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Musala%20Mail&key=YOUR-API-KEY>
 
-## Normal use
+### Using the binary
 
 Prepare your environment with the following variables
 
@@ -61,11 +61,12 @@ SMTP_SECURITY_TYPE: tls
 
 Then run the program:
 
-    $GOPATH/bin/musala-mail
+    $ $GOPATH/bin/musala-mail
 
-### With docker
+### Using with docker
 
-    docker run  \
+    $ docker build -f docker/Dockerfile -t musala-mail .
+    $ docker run  \
         -e EMAIL_FROM=
         -e EMAIL_TO=
         -e EMAIL_SUBJECT=
