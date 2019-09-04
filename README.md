@@ -5,7 +5,8 @@ Every morning, get the content of your favorite kanban board by email
 Compatibility:
 
 * :heavy_check_mark: __Trello__
-* :x: Libreboard (work in progress)
+* :x: Libreboard (not yet)
+* :x: Github Projects (not yet)
 
 ## Installation
 
