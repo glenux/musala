@@ -7,6 +7,7 @@ Compatibility:
 * :heavy_check_mark: __Trello__
 * :x: Libreboard (not yet)
 * :x: Github Projects (not yet)
+* :x: Nextcloud Deck (not yet)
 
 ## Installation
 
