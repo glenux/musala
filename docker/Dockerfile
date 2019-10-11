@@ -8,6 +8,7 @@ RUN git clone                                    \
         --branch develop                         \
         https://github.com/glenux/musala-mail    \
         /app                                     \
+    && rm -f /app/contrib-trello                 \
     && git clone                                 \
         https://github.com/glenux/contrib-trello \
         /app/contrib-trello
