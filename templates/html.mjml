@@ -1,0 +1,24 @@
+<mjml>
+  <mj-body>
+    
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
+      </mj-column>
+      <mj-column>
+      </mj-column>
+      <mj-column>
+        <mj-text font-size="20px" color="#F45E43" background-color="#662D91" font-family="helvetica">Hello World</mj-text>
+      </mj-column>
+    </mj-section>
+    
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="20px" align="center">Your daily task list</mj-text>
+        <mj-text font-size="30px" align="center">{{ Context.Board }}</mj-text>
+        <mj-text font-size="16px" align="center">Plop</mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>
