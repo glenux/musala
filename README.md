@@ -30,6 +30,7 @@ Make sure you have Go installed, then type:
 
 It will install Musala Mail binary in `$GOPATH/bin`
 
+
 ### With docker
 
 Make sure you have Docker installed, then type:
@@ -45,12 +46,14 @@ Make sure you have Docker installed, then type:
 3. Enable developper account on <https://trello.com/app-key>
 4. Get an developer API KEY
 
+
 ### Getting a Trello TOKEN
 
 Open the following URL in your web browser and authenticate yourself. That will
 give you the TRELLO_TOKEN that will be needed in the next step.
 
 <https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Musala%20Mail&key=YOUR-API-KEY>
+
 
 ### Using the binary
 
@@ -109,5 +112,5 @@ Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 ## License
 
-Musala Push is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+Musala Push is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
 
