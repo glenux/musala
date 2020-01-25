@@ -1,8 +1,8 @@
 # Musala Push
 
-<!-- ![Build](https://github.com/glenux/namarara/workflows/build/badge.svg?branch=master) -->
-<!-- [![Gem Version](https://badge.fury.io/rb/namarara.svg)](https://rubygems.org/gems/namarara) -->
-[![GitHub license](https://img.shields.io/github/license/glenux/namarara.svg)](https://github.com/glenux/namarara/blob/master/LICENSE)
+<!-- ![Build](https://github.com/glenux/musala-push/workflows/build/badge.svg?branch=master) -->
+<!-- [![Gem Version](https://badge.fury.io/rb/musala-push.svg)](https://rubygems.org/gems/musala-push) -->
+[![GitHub license](https://img.shields.io/github/license/glenux/musala-push.svg)](https://github.com/glenux/musala-push/blob/master/LICENSE)
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
 Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
@@ -109,5 +109,5 @@ Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 ## License
 
-Musala Mail is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE file.
+Musala Push is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE file.
 
