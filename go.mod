@@ -58,4 +58,4 @@ require (
 	honnef.co/go/tools v0.0.1-2019.2.2 // indirect
 )
 
-replace github.com/glenux/contrib-trello => ./contrib-trello
+// replace github.com/glenux/contrib-trello => ./contrib-trello
