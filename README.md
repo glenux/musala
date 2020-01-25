@@ -1,12 +1,24 @@
-# Musala Mail
+# Musala Push
 
-Every morning, get the content of your favorite kanban board by email
+<!-- ![Build](https://github.com/glenux/namarara/workflows/build/badge.svg?branch=master) -->
+<!-- [![Gem Version](https://badge.fury.io/rb/namarara.svg)](https://rubygems.org/gems/namarara) -->
+[![GitHub license](https://img.shields.io/github/license/glenux/namarara.svg)](https://github.com/glenux/namarara/blob/master/LICENSE)
+[![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
-Compatibility:
+Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
+
+Task sources:
 
 * :heavy_check_mark: __Trello__
 * :x: Libreboard (not yet)
 * :x: Github Projects (not yet)
+
+Delivery via:
+
+* :heavy_check_mark: __E-mail__
+* :x: Whatsapp
+* :x: SMS
+
 
 ## Installation
 
@@ -14,7 +26,7 @@ Compatibility:
 
 Make sure you have Go installed, then type:
 
-    $ go install github.com/glenux/musala-mail/...
+    $ go install github.com/glenux/musala-push/...
 
 It will install Musala Mail binary in `$GOPATH/bin`
 
@@ -22,7 +34,7 @@ It will install Musala Mail binary in `$GOPATH/bin`
 
 Make sure you have Docker installed, then type:
 
-    $ docker build -t musala-mail -f docker/Dockerfile .
+    $ docker build -t musala-push -f docker/Dockerfile .
 
 ## Usage
 
@@ -62,11 +74,11 @@ SMTP_SECURITY_TYPE: tls
 
 Then run the program:
 
-    $ $GOPATH/bin/musala-mail
+    $ $GOPATH/bin/musala-push
 
 ### Using with docker
 
-    $ docker build -f docker/Dockerfile -t musala-mail .
+    $ docker build -f docker/Dockerfile -t musala-push .
     $ docker run  \
         -e EMAIL_FROM=
         -e EMAIL_TO=
@@ -74,12 +86,12 @@ Then run the program:
         -e EMAIL_FROM=
         -e EMAIL_TO=
         -e EMAIL_SUBJECT=
-        -v /var/lib/musala-mail/musala-mail.cron:/app/musala-mail.cron \
-        -it musala-mail:latest
+        -v /var/lib/musala-push/musala-push.cron:/app/musala-push.cron \
+        -it musala-push:latest
 
 ## Contributing
 
-1. Fork it ( http://github.com/glenux/musala-mail/fork )
+1. Fork it ( http://github.com/glenux/musala-push/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
