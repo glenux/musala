@@ -1,4 +1,4 @@
-module github.com/glenux/musala-mail
+module github.com/glenux/musala-push
 
 require (
 	cloud.google.com/go v0.44.3 // indirect

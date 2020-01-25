@@ -6,7 +6,7 @@ FROM golang:1.12 AS build
 RUN git clone                                    \
         --single-branch                          \
         --branch develop                         \
-        https://github.com/glenux/musala-mail    \
+        https://github.com/glenux/musala-push    \
         /app                                     \
     && rm -f /app/contrib-trello                 \
     && git clone                                 \
@@ -30,9 +30,9 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 RUN mkdir /app
-COPY --from=build /app/musala-mail /app/
-COPY docker/musala-mail.cron /app/
+COPY --from=build /app/musala-push /app/
+COPY docker/musala-push.cron /app/
 COPY templates/ /app/templates
 
-CMD ["/bin/sh", "-c", "/usr/bin/crontab /app/musala-mail.cron && /usr/sbin/crond -f"]
+CMD ["/bin/sh", "-c", "/usr/bin/crontab /app/musala-push.cron && /usr/sbin/crond -f"]
 

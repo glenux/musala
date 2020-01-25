@@ -1,6 +1,6 @@
 
 GOFILES=$(wildcard *.go)
-NAME=musala-mail
+NAME=musala-push
 
 all: build
 
