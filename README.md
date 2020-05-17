@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/glenux/musala-push.svg)](https://github.com/glenux/musala-push/blob/master/LICENSE.txt)
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
-Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
+Every morning, get your task lists by email, WhatsApp or SMS.
 
 Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/mosala)
 
