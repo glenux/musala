@@ -1,4 +1,4 @@
-# Musala Push
+# Musala
 
 <!-- ![Build](https://github.com/glenux/musala-push/workflows/build/badge.svg?branch=master) -->
 <!-- [![Gem Version](https://badge.fury.io/rb/musala-push.svg)](https://rubygems.org/gems/musala-push) -->
@@ -6,6 +6,10 @@
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
 Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
+
+Note: _musala_ means _work_ [in Lingala](https://dic.lingala.be/fr/mosala)
+
+## Roadmap
 
 Task sources:
 
