@@ -7,7 +7,7 @@
 
 Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
 
-Note: _musala_ means _work_ [in Lingala](https://dic.lingala.be/fr/mosala)
+Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/mosala)
 
 ## Roadmap
 
