@@ -107,9 +107,8 @@ Then run the program:
 
 ## Credits
 
-Author & Maintainer: [Glenn Y. ROLLAND](https://github.com/glenux)
-
-Contributors: none yet ;)
+* [Glenn Y. ROLLAND](https://github.com/glenux) - author & maintainer: 
+* You? Fork the project and become a contributor!
 
 Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
