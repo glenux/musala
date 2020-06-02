@@ -15,7 +15,8 @@ Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/m
 Task sources:
 
 * :heavy_check_mark: __Trello__
-* :x: Nextcloud Deck (not yet) [API Reference](https://github.com/nextcloud/deck/blob/master/docs/API.md)
+* :x: Nextcloud Deck (not yet) - [API Reference](https://github.com/nextcloud/deck/blob/master/docs/API.md)
+* :x: Wekan (not yet) - [API Reference](https://github.com/wekan/wekan/wiki/REST-API)
 * :x: Libreboard (not yet)
 * :x: Github Projects (not yet)
 
