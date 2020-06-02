@@ -35,6 +35,11 @@ Delivery via:
 * :x: Whatsapp
 * :x: IRC
 
+User interface
+
+* :heavy_check_mark: Command line
+* :x: Web app
+
 ## Installation
 
 ### From sources
