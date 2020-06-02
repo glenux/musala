@@ -29,7 +29,7 @@ Delivery via:
 
 ## Installation
 
-### With go
+### From sources
 
 Make sure you have Go installed, then type:
 
