@@ -24,6 +24,8 @@ Delivery via:
 
 * :heavy_check_mark: __E-mail__
 * :x: Whatsapp
+* :x: Telegram
+* :x: IRC
 * :x: SMS
 
 
