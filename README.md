@@ -23,11 +23,11 @@ Task sources:
 Delivery via:
 
 * :heavy_check_mark: __E-mail__
-* :x: IRC
-* :x: Whatsapp
 * :x: Telegram
 * :x: Slack
 * :x: SMS
+* :x: Whatsapp
+* :x: IRC
 
 ## Installation
 
