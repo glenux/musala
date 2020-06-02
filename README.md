@@ -20,6 +20,12 @@ Task sources:
 * :x: Libreboard (not yet)
 * :x: Github Projects (not yet)
 
+Source selection
+
+* :heavy_check_mark: __All of them__
+* :heavy_check_mark: __Favorited boards__
+* :x: Only selected ones
+
 Delivery via:
 
 * :heavy_check_mark: __E-mail__
