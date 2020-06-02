@@ -35,9 +35,9 @@ Delivery via:
 * :x: Whatsapp
 * :x: IRC
 
-User interface
+User interface for account configuration
 
-* :heavy_check_mark: Command line
+* :heavy_check_mark: Command line + environment variables
 * :x: Web app
 
 ## Installation
