@@ -42,7 +42,7 @@ func main() {
 		fmt.Printf("d: exporting content of %s\n", trelloBoard.Name)
 
 		trelloMarkdown := trelloBoard.ExportToMarkdown()
-		trelloHtml := trelloBoard.ExportToHtml()
+		trelloHTML := trelloBoard.ExportToHtml()
 		config.EmailSubject = fmt.Sprintf("Daily mail for %s", trelloBoard.Name)
 
 		// Create email enveloppe
@@ -54,7 +54,7 @@ func main() {
 		email.SetHeader("From", config.EmailFrom)
 		email.SetHeader("Subject", config.EmailSubject)
 		email.SetBody("text/plain", trelloMarkdown)
-		email.AddAlternative("text/html", trelloHtml)
+		email.AddAlternative("text/html", trelloHTML)
 
 		// Connect and send email
 		var transport *mail.Dialer
