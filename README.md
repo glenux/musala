@@ -1,4 +1,4 @@
-# Musala Push
+# <img src="doc/logo-title-paths.svg" width="50%" style="display: block; margin: 0 auto;" alt="Musala" />
 
 <!-- ![Build](https://github.com/glenux/musala-push/workflows/build/badge.svg?branch=master) -->
 <!-- [![Gem Version](https://badge.fury.io/rb/musala-push.svg)](https://rubygems.org/gems/musala-push) -->
@@ -7,6 +7,10 @@
 
 Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
 
+Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/mosala)
+
+## Roadmap
+
 Task sources:
 
 * :heavy_check_mark: __Trello__
@@ -14,6 +18,13 @@ Task sources:
 * :x: Libreboard
 * :x: Github Projects
 * :x: Nextcloud Deck
+
+Delivery via:
+
+* :heavy_check_mark: __E-mail__
+* :x: Whatsapp
+* :x: SMS
+
 
 Delivery via:
 
@@ -105,9 +116,8 @@ Then run the program:
 
 ## Credits
 
-Author & Maintainer: [Glenn Y. ROLLAND](https://github.com/glenux)
-
-Contributors: none yet ;)
+* [Glenn Y. ROLLAND](https://github.com/glenux) - author & maintainer: 
+* You? Fork the project and become a contributor!
 
 Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 

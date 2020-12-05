@@ -19,6 +19,7 @@ var (
 	ALLOWED_SECURITY_TYPES = []string{"none", "tls", "starttls"}
 )
 
+// Config
 type Config struct {
 	EmailFrom    string   `mapstructure:"email-from"`
 	EmailTo      []string `mapstructure:"email-to"`
