@@ -1,0 +1,27 @@
+{
+  "name": "musala",
+  "version": "1.0.0",
+  "description": "<!-- ![Build](https://github.com/glenux/musala-push/workflows/build/badge.svg?branch=master) --> <!-- [![Gem Version](https://badge.fury.io/rb/musala-push.svg)](https://rubygems.org/gems/musala-push) --> [![GitHub license](https://img.shields.io/github/license/glenux/musala-push.svg)](https://github.com/glenux/musala-push/blob/master/LICENSE.txt) [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mjml": "^4.7.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glenux/musala-push.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glenux/musala-push/issues"
+  },
+  "homepage": "https://github.com/glenux/musala-push#readme"
+}
