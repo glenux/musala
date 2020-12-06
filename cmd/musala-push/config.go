@@ -25,22 +25,23 @@ type Config struct {
 	EmailTo      []string `mapstructure:"email-to"`
 	EmailSubject string   `mapstructure:"email-subject"`
 
-	SmtpHostname     string `mapstructure:"smtp-hostname"`
-	SmtpPort         uint16 `mapstructure:"smtp-port"`
-	SmtpUsername     string `mapstructure:"smtp-username"`
-	SmtpPassword     string `mapstructure:"smtp-password"`
-	SmtpAuthType     string `mapstructure:"smtp-auth-type"`
-	SmtpSecurityType string `mapstructure:"smtp-security-type"`
+	SMTPHostname     string `mapstructure:"smtp-hostname"`
+	SMTPPort         uint16 `mapstructure:"smtp-port"`
+	SMTPUsername     string `mapstructure:"smtp-username"`
+	SMTPPassword     string `mapstructure:"smtp-password"`
+	SMTPAuthType     string `mapstructure:"smtp-auth-type"`
+	SMTPSecurityType string `mapstructure:"smtp-security-type"`
 
-	TrelloUrl    string `mapstructure:"trello-url"`
-	TrelloApiKey string `mapstructure:"trello-api-key"`
+	TrelloURL    string `mapstructure:"trello-url"`
+	TrelloAPIKey string `mapstructure:"trello-api-key"`
 	TrelloToken  string `mapstructure:"trello-token"`
 
 	Parser *cobra.Command `mapstructure:"-"`
 }
 
+// NewConfig : create configuration object
 func NewConfig() *Config {
-	self := &Config{}
+	config := &Config{}
 
 	cmd := &cobra.Command{
 		Use: programBinary,
@@ -50,20 +51,20 @@ func NewConfig() *Config {
 	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	viper.AutomaticEnv()
 
-	cmd.PersistentFlags().StringVarP(&self.EmailFrom, "email-from", "", "", "address of sender")
-	cmd.PersistentFlags().StringArrayVarP(&self.EmailTo, "email-to", "", []string{}, "address(es) of recipient(s)")
-	cmd.PersistentFlags().StringVarP(&self.EmailSubject, "email-subject", "", "", "email subject")
+	cmd.PersistentFlags().StringVarP(&config.EmailFrom, "email-from", "", "", "address of sender")
+	cmd.PersistentFlags().StringArrayVarP(&config.EmailTo, "email-to", "", []string{}, "address(es) of recipient(s)")
+	cmd.PersistentFlags().StringVarP(&config.EmailSubject, "email-subject", "", "", "email subject")
 
-	cmd.PersistentFlags().StringVarP(&self.TrelloUrl, "trello-url", "", "", "url of trello board")
-	cmd.PersistentFlags().StringVarP(&self.TrelloUrl, "trello-api-key", "", "", "API KEY for trello access")
-	cmd.PersistentFlags().StringVarP(&self.TrelloToken, "trello-token", "", "", "TOKEN for trello access")
+	cmd.PersistentFlags().StringVarP(&config.TrelloURL, "trello-url", "", "", "url of trello board")
+	cmd.PersistentFlags().StringVarP(&config.TrelloURL, "trello-api-key", "", "", "API KEY for trello access")
+	cmd.PersistentFlags().StringVarP(&config.TrelloToken, "trello-token", "", "", "TOKEN for trello access")
 
-	cmd.PersistentFlags().StringVarP(&self.SmtpHostname, "smtp-hostname", "", "", "address of smtp server")
-	cmd.PersistentFlags().StringVarP(&self.SmtpUsername, "smtp-username", "", "", "username for smtp server")
-	cmd.PersistentFlags().StringVarP(&self.SmtpPassword, "smtp-password", "", "", "password for smtp server")
-	cmd.PersistentFlags().Uint16VarP(&self.SmtpPort, "smtp-port", "", 25, "port for smtp server")
-	cmd.PersistentFlags().StringVarP(&self.SmtpAuthType, "smtp-auth-type", "", "", "authentication type for smtp server")
-	cmd.PersistentFlags().StringVarP(&self.SmtpSecurityType, "smtp-security-type", "", "", "security type for smtp server")
+	cmd.PersistentFlags().StringVarP(&config.SMTPHostname, "smtp-hostname", "", "", "address of smtp server")
+	cmd.PersistentFlags().StringVarP(&config.SMTPUsername, "smtp-username", "", "", "username for smtp server")
+	cmd.PersistentFlags().StringVarP(&config.SMTPPassword, "smtp-password", "", "", "password for smtp server")
+	cmd.PersistentFlags().Uint16VarP(&config.SMTPPort, "smtp-port", "", 25, "port for smtp server")
+	cmd.PersistentFlags().StringVarP(&config.SMTPAuthType, "smtp-auth-type", "", "", "authentication type for smtp server")
+	cmd.PersistentFlags().StringVarP(&config.SMTPSecurityType, "smtp-security-type", "", "", "security type for smtp server")
 
 	viper.BindPFlag("email-from", cmd.PersistentFlags().Lookup("email-from"))
 	viper.BindPFlag("email-to", cmd.PersistentFlags().Lookup("email-to"))
@@ -78,30 +79,31 @@ func NewConfig() *Config {
 	viper.BindPFlag("smtp-auth-type", cmd.PersistentFlags().Lookup("smtp-auth-type"))
 	viper.BindPFlag("smtp-security-type", cmd.PersistentFlags().Lookup("smtp-security-type"))
 
-	self.Parser = cmd
-	return self
+	config.Parser = cmd
+	return config
 }
 
-func (self *Config) Parse() error {
+// Parse : handle command line options
+func (config *Config) Parse() error {
 	// set config defaults
 	// persistent flags
 	// environment & config
 	// viper.SetEnvPrefix("")
 
-	if err := self.Parser.Execute(); err != nil {
+	if err := config.Parser.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	showHelp, _ := self.Parser.Flags().GetBool("help")
+	showHelp, _ := config.Parser.Flags().GetBool("help")
 	if showHelp {
 		os.Exit(0)
 	}
 
-	if err := viper.Unmarshal(&self); err != nil {
+	if err := viper.Unmarshal(&config); err != nil {
 		panic("Unable to unmarshal config")
 	}
 
-	// spew.Dump(self)
+	// spew.Dump(config)
 	return nil
 }

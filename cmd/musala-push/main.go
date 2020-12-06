@@ -16,7 +16,7 @@ func main() {
 
 	// Get task list as markdown
 	fmt.Println("d: configuring trello")
-	trelloCtx := NewTrello(config.TrelloApiKey, config.TrelloToken)
+	trelloCtx := NewTrello(config.TrelloAPIKey, config.TrelloToken)
 	if trelloCtx == nil {
 		fmt.Println("ERROR: Unable to initialize trello context")
 		os.Exit(1)
@@ -24,9 +24,9 @@ func main() {
 
 	fmt.Println("d: getting trello boards")
 	var trelloBoardsList []TrelloBoard
-	if len(config.TrelloUrl) > 0 {
-		fmt.Printf("d: using given url %s\n", config.TrelloUrl)
-		trelloBoard := trelloCtx.GetBoard(config.TrelloUrl)
+	if len(config.TrelloURL) > 0 {
+		fmt.Printf("d: using given url %s\n", config.TrelloURL)
+		trelloBoard := trelloCtx.GetBoard(config.TrelloURL)
 		trelloBoardsList = append(trelloBoardsList, trelloBoard)
 	} else {
 		fmt.Println("d: fetching boards")
@@ -58,21 +58,21 @@ func main() {
 
 		// Connect and send email
 		var transport *mail.Dialer
-		if len(config.SmtpUsername) > 0 {
+		if len(config.SMTPUsername) > 0 {
 			fmt.Println("d: transport w/ username")
 			transport = mail.NewDialer(
-				config.SmtpHostname,
-				int(config.SmtpPort),
-				config.SmtpUsername,
-				config.SmtpPassword,
+				config.SMTPHostname,
+				int(config.SMTPPort),
+				config.SMTPUsername,
+				config.SMTPPassword,
 			)
 			// disable cert verification
 			transport.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 		} else {
 			fmt.Println("d: transport w/out username")
 			transport = &mail.Dialer{
-				Host: config.SmtpHostname,
-				Port: int(config.SmtpPort),
+				Host: config.SMTPHostname,
+				Port: int(config.SMTPPort),
 			}
 		}
 
