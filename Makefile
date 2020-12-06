@@ -25,3 +25,18 @@ clean: ## remove build artifacts
 
 test: build 
 	./test.sh
+
+npm: 
+	npm install
+
+
+MJML_TEMPLATES=$(wildcard templates/*.mjml)
+MJML_OUTPUT=$(patsubst %.mjml,%.mjml.html,$(MJML_TEMPLATES))
+
+%.mjml.html: %.mjml
+	npx mjml $< --config.minify > $@
+
+templates: $(MJML_OUTPUT)
+
+.PHONY: templates
+
