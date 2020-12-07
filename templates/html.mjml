@@ -1,43 +1,55 @@
 <mjml>
+  <mj-head>
+	  <mj-style inline="inline">
+		.footer-link { color: white !important; font-weight: bold; text-decoration: underline !important; }
+	  </mj-style>
+  </mj-head>
+
   <mj-body>
     <mj-section>
       <mj-group>
-      <mj-column>
-        <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
-      </mj-column>
-      <mj-column>
-        <mj-text font-size="20px" color="#F45E43" font-family="helvetica" align="center">
-          Mardi 28 aout 2020
-        </mj-text>
-        <mj-button font-family="Helvetica" background-color="#f45e43" color="white">Visit Board
-        </mj-button>
-      </mj-column>
+        <mj-column>
+          <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
+        </mj-column>
+        <mj-column>
+          <mj-text font-size="20px" color="#F45E43" font-family="helvetica" align="center">
+            Mardi 28 aout 2020
+          </mj-text>
+          <mj-button href="#" font-family="Helvetica" background-color="#f45e43" color="white">Visit Board
+          </mj-button>
+        </mj-column>
       </mj-group>
-     </mj-section>
-     <mj-section>
-       <mj-column>
-      	<mj-divider border-color="#F45E43"></mj-divider>
-         <mj-text font-size="20px" color="#F45E43" font-family="helvetica" align="center">
-          Your daily task list for
-       	 </mj-text>
-         <mj-text font-size="24px" font-weight="bold" color="#F45E43" font-family="helvetica" align="center">
-          BC.Business.Operational
-       	 </mj-text>
-         <mj-divider border-color="#F45E43"></mj-divider>
-       </mj-column>
     </mj-section>
-     <mj-section>
-       <mj-column>
-         <mj-text font-size="20px" color="#f45e43" font-family="helvetica" font-weight="bold" align="left" >
-          Topic dsfsdfs
-       	 </mj-text>
-         <mj-text font-size="16px" color="#666" font-family="helvetica" font-weight="bold" align="left">
-          Topic dsfsdfs
-       	 </mj-text>
-           <mj-text font-size="16px" color="#666" font-family="helvetica" align="left">
-          Lorem ipsum dolor sit amet, blablablabla <a href="rezrez">truc</a>
-       	 </mj-text>
-       </mj-column>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#F45E43"></mj-divider>
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica" align="center">
+          Your daily task list for
+        </mj-text>
+        <mj-text font-size="24px" font-weight="bold" color="#F45E43" font-family="helvetica" align="center">
+          BC.Business.Operational
+        </mj-text>
+        <mj-divider border-color="#F45E43"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-button font-size="20px" font-family="Helvetica" font-weight="bold"  background-color="#f45e43" align="left" color="white">Topic ABC
+        </mj-button>
+          <mj-text font-size="16px" color="#666" padding-bottom="0" font-family="helvetica" font-weight="bold" align="left">
+            Topic dsfsdfs
+          </mj-text>
+          <mj-text font-size="16px" color="#666" font-family="helvetica" align="left">
+              Lorem ipsum dolor sit amet, blablablabla <a href="rezrez">&gt;&gt; see more</a>
+          </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column background-color="white" inner-background-color="#f45e43" padding-right="20px" padding-left="20px">
+          <mj-text font-size="16px" color="#ffffff" font-family="helvetica" align="left" >
+			  To stop receiving these emails, you can change your <a href="#" class="footer-link">notification preferences</a> in <a href="#" class="footer-link">Musala</a>.
+          </mj-text>
+      </mj-column>
     </mj-section>
   </mj-body>
 </mjml>
