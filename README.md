@@ -1,7 +1,6 @@
 # <img src="doc/logo-title-paths.svg" width="50%" style="display: block; margin: 0 auto;" alt="Musala" />
 
 ![Build](https://github.com/glenux/musala/workflows/build/badge.svg?branch=master)
-<!-- [![Gem Version](https://badge.fury.io/rb/musala.svg)](https://rubygems.org/gems/musala) -->
 [![GitHub license](https://img.shields.io/github/license/glenux/musala.svg)](https://github.com/glenux/musala/blob/master/LICENSE.txt)
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
