@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/glenux/musala-push.svg)](https://github.com/glenux/musala-push/blob/master/LICENSE.txt)
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
-Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
+Every morning, get your task lists by email, WhatsApp or SMS.
 
 Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/mosala)
 
@@ -15,19 +15,34 @@ Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/m
 Task sources:
 
 * :heavy_check_mark: __Trello__
+* :x: Nextcloud Deck (not yet) - [API Reference](https://github.com/nextcloud/deck/blob/master/docs/API.md)
+* :x: Wekan (not yet) - [API Reference](https://github.com/wekan/wekan/wiki/REST-API)
 * :x: Libreboard (not yet)
 * :x: Github Projects (not yet)
+
+Source selection
+
+* :heavy_check_mark: __All of them__
+* :heavy_check_mark: __Favorited boards__
+* :x: Only selected ones
 
 Delivery via:
 
 * :heavy_check_mark: __E-mail__
-* :x: Whatsapp
+* :x: Telegram
+* :x: Slack
 * :x: SMS
+* :x: Whatsapp
+* :x: IRC
 
+User interface for account configuration
+
+* :heavy_check_mark: Command line + environment variables
+* :x: Web app
 
 ## Installation
 
-### With go
+### From sources
 
 Make sure you have Go installed, then type:
 
@@ -116,5 +131,5 @@ Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 ## License
 
-Musala Push is Copyright © 2018-2019 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
+Musala Push is Copyright © 2018-2020 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
 
