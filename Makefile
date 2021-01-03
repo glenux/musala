@@ -14,6 +14,7 @@ all: help
 build: build-binaries build-templates  ## build executable
 
 build-binaries: build-templates
+	mkdir -p $(BINDIR)
 	cd $(BINDIR) && go build ../...
 
 build-templates: $(MJML_OUTPUT)
