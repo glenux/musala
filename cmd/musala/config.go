@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	programBinary string = "musala-push"
+	programBinary string = "musala"
 )
 
 var (
