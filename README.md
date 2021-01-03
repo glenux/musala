@@ -22,7 +22,7 @@ Source selection
 
 * :heavy_check_mark: __All of them__
 * :heavy_check_mark: __Favorited boards__
-* :x: Only selected ones
+* :heavy_check_mark: __Only selected ones__
 
 Delivery via:
 
