@@ -1,8 +1,0 @@
-# ALL boards for given user
-30 10 * * * cd /app && TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO="" /app/musala-mail
-
-# Send this board to other user
-30 10 * * * cd /app TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO=""  /app/musala-mail
-
-# Send this board to mailing list
-30 10 * * * cd /app TRELLO_URL="" TRELLO_TOKEN="" EMAIL_TO="" /app/musala-mail

@@ -1,12 +1,11 @@
 # <img src="doc/logo-title-paths.svg" width="50%" style="display: block; margin: 0 auto;" alt="Musala" />
 
-
-<!-- ![Build](https://github.com/glenux/musala-push/workflows/build/badge.svg?branch=master) -->
-<!-- [![Gem Version](https://badge.fury.io/rb/musala-push.svg)](https://rubygems.org/gems/musala-push) -->
-[![GitHub license](https://img.shields.io/github/license/glenux/musala-push.svg)](https://github.com/glenux/musala-push/blob/master/LICENSE.txt)
+![Build](https://github.com/glenux/musala/workflows/build/badge.svg?branch=master)
+<!-- [![Gem Version](https://badge.fury.io/rb/musala.svg)](https://rubygems.org/gems/musala) -->
+[![GitHub license](https://img.shields.io/github/license/glenux/musala.svg)](https://github.com/glenux/musala/blob/master/LICENSE.txt)
 [![Donate on patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/glenux)
 
-Every morning, get your task lists by email, WhatsApp or SMS.
+Every morning, get the content of your favorite kanban board by email, WhatsApp or SMS.
 
 Note: _musala_ means _work, occupation_ [in Lingala](https://dic.lingala.be/fr/mosala)
 
@@ -42,11 +41,11 @@ User interface for account configuration
 
 ## Installation
 
-### From sources
+### With go
 
 Make sure you have Go installed, then type:
 
-    $ go install github.com/glenux/musala-push/...
+    $ go install github.com/glenux/musala/...
 
 It will install Musala Mail binary in `$GOPATH/bin`
 
@@ -55,7 +54,7 @@ It will install Musala Mail binary in `$GOPATH/bin`
 
 Make sure you have Docker installed, then type:
 
-    $ docker build -t musala-push -f docker/Dockerfile .
+    $ docker build -t musala -f docker/Dockerfile .
 
 ## Usage
 
@@ -97,11 +96,11 @@ SMTP_SECURITY_TYPE: tls
 
 Then run the program:
 
-    $ $GOPATH/bin/musala-push
+    $ $GOPATH/bin/musala
 
 ### Using with docker
 
-    $ docker build -f docker/Dockerfile -t musala-push .
+    $ docker build -f docker/Dockerfile -t musala .
     $ docker run  \
         -e EMAIL_FROM=
         -e EMAIL_TO=
@@ -109,12 +108,12 @@ Then run the program:
         -e EMAIL_FROM=
         -e EMAIL_TO=
         -e EMAIL_SUBJECT=
-        -v /var/lib/musala-push/musala-push.cron:/app/musala-push.cron \
-        -it musala-push:latest
+        -v /var/lib/musala/musala.cron:/app/musala.cron \
+        -it musala:latest
 
 ## Contributing
 
-1. Fork it ( http://github.com/glenux/musala-push/fork )
+1. Fork it ( http://github.com/glenux/musala/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -131,5 +130,5 @@ Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 ## License
 
-Musala Push is Copyright © 2018-2020 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
+Musala is Copyright © 2018-2021 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
 
