@@ -131,3 +131,9 @@ Got questions? Need help? Tweet at [@glenux](https://twitter.com/glenux)
 
 Musala is Copyright © 2018-2021 Glenn ROLLAND. It is free software, and may be redistributed under the terms specified in the LICENSE.txt file.
 
+## See also...
+
+Following projects may also inspire you:
+
+* [72nd/deck-cli](https://github.com/72nd/deck-cli): a command-line tool for interacting with Nextcloud's Deck Plugin by using it's API
+
