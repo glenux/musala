@@ -9,7 +9,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mjml": "^4.7.1"
+    "mjml": "^4.7.1",
+    "y18n": ">=4.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
